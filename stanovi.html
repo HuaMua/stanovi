@@ -38,7 +38,6 @@
             margin-top: 40px;
         }
 
-        #add-entry,
         #delete-btn {
             margin-left: 10px;
         }
@@ -48,7 +47,26 @@
             border: 1px solid #ddd;
             border-radius: 6px;
             padding: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 45px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .entry:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: -23px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background-color: #000;
+        }
+
+        .entry.new-entry {
+            border: 3px solid #28a745;
+            background: #f8fff9;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
         }
 
         .entry-row {
@@ -74,7 +92,7 @@
             width: 30px;
             height: 30px;
             padding: 0;
-            font-size: 14px;
+            font-size: 18px;
             font-weight: bold;
             background: #cfcfcf;
             color: #333;
@@ -101,7 +119,7 @@
             text-decoration: none;
             font-weight: bold;
             flex: 1;
-            font-size: 14px;
+            font-size: 18px;
             text-decoration: underline;
         }
 
@@ -133,18 +151,7 @@
             background: #9f9f9f;
         }
 
-        #save-btn {
-            background: #007BFF;
-        }
 
-        #save-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .saving {
-            background: #ffc107 !important;
-        }
 
         h2 {
             margin: 0;
@@ -154,11 +161,16 @@
         }
 
         .header-buttons {
+            margin-bottom: 20px;
+        }
+
+        .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
             height: 40px;
-            margin-bottom: 20px;
+            position: relative;
         }
 
         .header-left {
@@ -168,16 +180,22 @@
             gap: 15px;
         }
 
-        .header-right {
+        .header-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
+            align-items: center;
+        }
+
+        .header-right {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
             gap: 10px;
         }
 
-        #new-entry {
-            border-bottom: 3px solid #c3c4c5;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-        }
+
 
         .collapse-header {
             display: flex;
@@ -194,16 +212,21 @@
         .collapse-header h3 {
             margin: 0;
             color: #356e91;
-            font-size: 16px;
+            font-size: 20px;
         }
 
         .collapse-arrow {
-            transition: transform 0.3s ease;
-            font-size: 18px;
+            transition: transform 0.3s ease !important;
+            font-size: 22px;
+            display: inline-block;
         }
 
         .collapse-arrow.collapsed {
-            transform: rotate(-90deg);
+            transform: rotate(-90deg) !important;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0 !important;
         }
 
         .collapsible-content {
@@ -225,19 +248,14 @@
             background: #f8f9fa;
         }
 
-        .person-box.adis {
-            background: #f4fff7;
-        }
+        .person-box.adis {}
 
-        .person-box.roditelji {
-            background: #d2e6f5;
-        }
+        .person-box.roditelji {}
 
         .person-header {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 15px;
         }
 
         .comment-row {
@@ -254,18 +272,18 @@
             font-weight: bold;
             margin-bottom: 5px;
             color: #555;
-            font-size: 12px;
+            font-size: 16px;
         }
 
         .comment-input {
             width: 95%;
-            height: 60px;
+            height: 180px;
             resize: vertical;
             padding: 6px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-family: Arial, sans-serif;
-            font-size: 14px;
+            font-size: 18px;
         }
 
         .comment-display {
@@ -277,7 +295,7 @@
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
             color: #555;
-            font-size: 14px;
+            font-size: 18px;
             white-space: pre-wrap;
             word-wrap: break-word;
         }
@@ -287,33 +305,14 @@
         }
 
         .icon-button {
-            font-size: 18px;
+            font-size: 22px;
         }
 
-        .paste-data-row {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 8px;
-        }
 
-        .paste-data-row textarea {
-            flex: 1;
-            height: 40px;
-            font-family: monospace;
-            font-size: 12px;
-        }
 
-        .url-search-save-row {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 8px;
-        }
 
-        .url-search-save-row input {
-            flex: 1;
-        }
+
+
 
         .maps-row {
             display: flex;
@@ -332,21 +331,21 @@
         }
 
         .instruction-text {
-            font-size: 11px;
+            font-size: 15px;
             color: #666;
             margin-bottom: 5px;
             font-style: italic;
         }
 
         .date-info {
-            font-size: 11px;
+            font-size: 15px;
             color: #666;
             margin-bottom: 8px;
             font-style: italic;
         }
 
         #status {
-            font-size: 19px;
+            font-size: 23px;
             color: #007bff;
             padding: 7px;
             font-style: italic;
@@ -361,76 +360,123 @@
             color: #dc3545;
             font-weight: bold;
         }
+
+        .person-header {
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            padding: 8px;
+            margin: -8px;
+        }
+
+        .person-header:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            background-color: rgba(0, 123, 255, 0.05);
+            transform: translateY(-1px);
+        }
+
+        #title {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        #title:hover {
+            color: #007bff;
+        }
+
+        .url-replacement-panel {
+            display: none;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .url-replacement-panel.show {
+            display: block;
+        }
+
+        .replacement-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .replacement-input-group label {
+            font-weight: bold;
+            min-width: 80px;
+            font-size: 14px;
+        }
+
+        .replacement-input-group input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+        }
     </style>
 </head>
 
 <body>
     <div id="sidebar">
         <div class="header-buttons">
-            <div class="header-left">
-                <h2 id="title">Stanovi</h2>
-            </div>
-            <div class="header-right">
-                <span id="status" class="loading">Loading...</span>
-                <button id="save-btn">Save</button>
-            </div>
-        </div>
-        <div id="new-entry">
-            <div class="entry">
-                <div class="collapse-header" onclick="toggleNewEntry()">
-                    <h3>Dodaj novi stan</h3>
-                    <span class="collapse-arrow collapsed">▼</span>
+            <div class="header-top">
+                <div class="header-left">
+                    <h2 id="title">Stanovi</h2>
                 </div>
-                <div class="collapsible-content collapsed" id="new-entry-content">
-                    <div class="paste-data-row">
-                        <textarea id="paste-data" placeholder='Paste JSON data here'></textarea>
-                        <button id="search-btn" class="icon-button" title="Parse pasted data">🔍</button>
-                    </div>
-                    <div class="url-search-save-row">
-                        <input type="text" id="new-url" placeholder="URL">
-                        <button id="add-entry" class="icon-button">💾</button>
-                    </div>
-                    <div class="entry-row">
-                        <input type="text" id="new-title" placeholder="Title">
-                    </div>
-                    <div class="maps-row">
-                        <input type="text" id="new-maps-mene" placeholder="Do mene (Google Maps)">
-                        <input type="text" id="new-maps-grada" placeholder="Do grada (Google Maps)">
-                    </div>
+                <div class="header-center">
+                    <button id="update-btn"
+                        style="background: #28a745; color: white; border: none; padding: 10px 21px; border-radius: 4px; font-size: 21px; cursor: pointer;"
+                        onmouseover="this.style.backgroundColor='#218838'"
+                        onmouseout="this.style.backgroundColor='#28a745'">Updatiraj</button>
+                </div>
+                <div class="header-right">
+                    <span id="status" class="loading">Učitava...</span>
+                </div>
+            </div>
 
-                    <!-- Adis Box -->
-                    <div class="person-box adis">
-                        <div class="person-header">
-                            <div class="rating-buttons" id="adis-rating">
-                                <button class="rating-btn" data-rating="1">1</button>
-                                <button class="rating-btn" data-rating="2">2</button>
-                                <button class="rating-btn" data-rating="3">3</button>
-                                <button class="rating-btn" data-rating="4">4</button>
-                                <button class="rating-btn" data-rating="5">5</button>
-                            </div>
-                        </div>
-                        <div class="comment-row">
-                            <div class="comment-group">
-                                <div class="comment-label">Negativni komentar</div>
-                                <textarea id="adis-negativno" class="comment-input"></textarea>
-                            </div>
-                            <div class="comment-group">
-                                <div class="comment-label">Pozitivni komentar</div>
-                                <textarea id="adis-pozitivno" class="comment-input"></textarea>
-                            </div>
-                        </div>
-                    </div>
+            <!-- URL Replacement Panel -->
+            <div id="url-replacement-panel" class="url-replacement-panel">
+                <div class="replacement-input-group">
+                    <label for="old-string">Old String:</label>
+                    <input type="text" id="old-string" placeholder="Tekst za zamijenu">
+                </div>
+                <div class="replacement-input-group">
+                    <label for="new-string">New String:</label>
+                    <input type="text" id="new-string" placeholder="Novi tekst">
                 </div>
             </div>
         </div>
+
         <div id="entries"></div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; cursor: pointer;">
+        <div style="position: absolute; top: 20px; right: 30px; color: white; font-size: 34px; cursor: pointer;"
+            onclick="closeImageModal()">&times;</div>
+        <div
+            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 90%; max-height: 90%;">
+            <img id="modalImage" style="width: 100%; height: 100%; object-fit: contain;" alt="Property Image">
+            <div id="imageCounter"
+                style="position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); color: white; text-align: center;">
+            </div>
+        </div>
+        <div id="prevButton"
+            style="position: absolute; top: 50%; left: 30px; transform: translateY(-50%); color: white; font-size: 44px; cursor: pointer; user-select: none;"
+            onclick="previousImage()">&#8249;</div>
+        <div id="nextButton"
+            style="position: absolute; top: 50%; right: 30px; transform: translateY(-50%); color: white; font-size: 44px; cursor: pointer; user-select: none;"
+            onclick="nextImage()">&#8250;</div>
     </div>
 
     <script>
         const entriesDiv = document.getElementById('entries');
         const title = document.getElementById('title');
         const status = document.getElementById('status');
-        const saveBtn = document.getElementById('save-btn');
 
         // JSONBin.io configuration
         const API_KEY = '$2a$10$S0dGVfegNTRBt2VRn91SNOImoGkyfcc8nfF1BtPfbnAXRjAyieFKi';
@@ -438,10 +484,17 @@
         const API_BASE = 'https://api.jsonbin.io/v3/b';
 
         let entries = [];
-        let selectedAdisRating = null;
         let isLoading = false;
         let isSaving = false;
         let statusTimeout = null;
+
+        // Image modal variables
+        let currentImages = [];
+        let currentImageIndex = 0;
+
+        // Track new entries added
+        let newEntriesCount = 0;
+        let newEntryIndices = new Set(); // Track indices of new entries for green border
 
         function formatDate(dateString) {
             const date = new Date(dateString);
@@ -454,7 +507,7 @@
             return new Date().toISOString();
         }
 
-        function setStatus(message, className = '', autoClear = true) {
+        function setStatus(message, className = '', autoClear = false) {
             if (statusTimeout) {
                 clearTimeout(statusTimeout);
             }
@@ -473,7 +526,7 @@
         async function loadData() {
             if (isLoading) return;
             isLoading = true;
-            setStatus('Loading...', 'loading', false);
+            setStatus('Učitava...', 'loading', false);
 
             try {
                 const response = await fetch(`${API_BASE}/${BIN_ID}`, {
@@ -492,15 +545,19 @@
 
                 // Filter out empty objects (like {})
                 entries = loadedEntries.filter(entry => {
-                    return entry && Object.keys(entry).length > 0 && entry.url;
+                    return entry && Object.keys(entry).length > 0 && (entry.url || entry.title);
                 });
+
+                // Clear new entry tracking on initial load
+                newEntryIndices.clear();
+                newEntriesCount = 0;
 
                 saveEntriesToDOM();
                 updateTitle();
-                setStatus('Data loaded successfully');
+                setStatus('Podaci uspješno učitani');
             } catch (error) {
                 console.error('Error loading data:', error);
-                setStatus('Error loading data', 'error');
+                setStatus('Nije uspjelo, pokusaj opet', 'error');
                 entries = []; // Initialize with empty array on error
                 saveEntriesToDOM();
                 updateTitle();
@@ -512,9 +569,7 @@
         async function saveData() {
             if (isSaving) return;
             isSaving = true;
-            saveBtn.disabled = true;
-            saveBtn.className = 'saving';
-            saveBtn.textContent = 'Saving...';
+            setStatus('Čuva...', 'loading', false);
 
             try {
                 // If no entries, save [{}] instead of empty array
@@ -533,24 +588,34 @@
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
-                setStatus('Data saved successfully');
+                setStatus('Automatski sačuvano');
             } catch (error) {
                 console.error('Error saving data:', error);
-                setStatus('Error saving data', 'error');
+                setStatus('Nije uspjelo, pokusaj opet', 'error');
             } finally {
                 isSaving = false;
-                saveBtn.disabled = false;
-                saveBtn.className = '';
-                saveBtn.textContent = 'Save';
             }
         }
 
-        function toggleNewEntry() {
-            const content = document.getElementById('new-entry-content');
-            const arrow = document.querySelector('.collapse-arrow');
 
-            content.classList.toggle('collapsed');
-            arrow.classList.toggle('collapsed');
+
+        function toggleComments(headerElement, contentId) {
+            const content = document.getElementById(contentId);
+            const arrow = headerElement.querySelector('.collapse-arrow');
+
+            if (content.classList.contains('collapsed')) {
+                // Expand
+                content.classList.remove('collapsed');
+                content.style.maxHeight = '220px';
+                arrow.classList.remove('collapsed');
+                console.log('Expanding comments:', contentId);
+            } else {
+                // Collapse
+                content.classList.add('collapsed');
+                content.style.maxHeight = '0';
+                arrow.classList.add('collapsed');
+                console.log('Collapsing comments:', contentId);
+            }
         }
 
         function updateTitle() {
@@ -559,47 +624,15 @@
             const month = String(today.getMonth() + 1).padStart(2, '0');
             const year = today.getFullYear();
             const date = `${day}.${month}.${year}`;
-            title.textContent = `Stanovi ${entries.length > 0 ? date : ''}`;
+
+            let titleText = `Stanovi ${entries.length > 0 ? date : ''}`;
+            if (newEntriesCount > 0) {
+                titleText += ` (+${newEntriesCount} novih)`;
+            }
+            title.textContent = titleText;
         }
 
-        function parseScrapedData() {
-            const pasteData = document.getElementById('paste-data').value.trim();
 
-            if (!pasteData) {
-                alert('Please paste the JSON data from the scraper script first.');
-                return;
-            }
-
-            try {
-                const data = JSON.parse(pasteData);
-
-                // Validate that we have the expected fields
-                if (!data.url) {
-                    alert('Invalid data: missing URL field');
-                    return;
-                }
-
-                // Populate the form fields
-                if (data.url) {
-                    document.getElementById('new-url').value = data.url;
-                }
-                if (data.title) {
-                    document.getElementById('new-title').value = data.title;
-                }
-                if (data.mapsMene) {
-                    document.getElementById('new-maps-mene').value = data.mapsMene;
-                }
-                if (data.mapsGrada) {
-                    document.getElementById('new-maps-grada').value = data.mapsGrada;
-                }
-
-                // Clear the paste area after successful parsing
-                document.getElementById('paste-data').value = '';
-            } catch (error) {
-                console.error('Error parsing JSON:', error);
-                alert('❌ Error parsing JSON data. Please make sure you copied the correct data from the scraper script.\n\nExpected format: {"url":"...","title":"...","mapsMene":"...","mapsGrada":"..."}');
-            }
-        }
 
         function updateEntryModifiedDate(index) {
             entries[index].dateModified = getCurrentDateString();
@@ -607,98 +640,284 @@
 
         function saveEntriesToDOM() {
             entriesDiv.innerHTML = '';
-            entries.forEach((entry, index) => {
+            // Display entries in reverse order (newest first) but keep original indices
+            const reversedEntries = [...entries].reverse();
+            reversedEntries.forEach((entry, reverseIndex) => {
+                const index = entries.length - 1 - reverseIndex; // Get original index
                 const wrapper = document.createElement('div');
                 wrapper.className = 'entry';
+
+                // Add green border if this is a new entry
+                if (newEntryIndices.has(index)) {
+                    wrapper.classList.add('new-entry');
+                }
 
                 // Date info
                 const dateInfo = document.createElement('div');
                 dateInfo.className = 'date-info';
                 let dateText = '';
                 if (entry.dateAdded) {
-                    dateText += `Added: ${formatDate(entry.dateAdded)}`;
+                    dateText += `Dodano: ${formatDate(entry.dateAdded)}`;
                 }
                 if (entry.dateModified && entry.dateModified !== entry.dateAdded) {
-                    dateText += ` | Modified: ${formatDate(entry.dateModified)}`;
+                    dateText += ` | Izmijenjeno: ${formatDate(entry.dateModified)}`;
                 }
                 dateInfo.textContent = dateText;
 
-                // Links row: Do mene, Do grada, then Title
+                // Links row: Separate title area and delete button
                 const linksRow = document.createElement('div');
                 linksRow.className = 'entry-links-row';
+                linksRow.style.cssText = 'display: flex; justify-content: space-between; align-items: flex-start;';
 
-                if (entry.mapsMene) {
-                    const meneLink = document.createElement('a');
-                    meneLink.textContent = 'Do mene';
-                    meneLink.href = entry.mapsMene;
-                    meneLink.target = '_blank';
-                    meneLink.style.color = '#28a745';
-                    meneLink.style.fontWeight = 'bold';
-                    linksRow.appendChild(meneLink);
+                // Title and email container
+                const titleContainer = document.createElement('div');
+                titleContainer.style.cssText = 'flex: 1;';
+
+                if (entry.url && entry.url.trim() !== '') {
+                    const titleLink = document.createElement('a');
+                    titleLink.textContent = entry.title || 'Bez naslova';
+                    titleLink.href = applyUrlReplacements(entry.url);
+                    titleLink.target = '_blank';
+                    titleLink.className = 'entry-title-link';
+                    titleContainer.appendChild(titleLink);
+                } else {
+                    const titleSpan = document.createElement('span');
+                    titleSpan.textContent = `PDF: ${entry.title || 'Bez naslova'}`;
+                    titleSpan.className = 'entry-title-link';
+                    titleSpan.style.cssText = 'font-weight: bold; font-size: 24px; color: #333; text-decoration: none;';
+                    titleContainer.appendChild(titleSpan);
                 }
 
-                if (entry.mapsGrada) {
-                    const gradaLink = document.createElement('a');
-                    gradaLink.textContent = 'Do grada';
-                    gradaLink.href = entry.mapsGrada;
-                    gradaLink.target = '_blank';
-                    gradaLink.style.color = '#28a745';
-                    gradaLink.style.fontWeight = 'bold';
-                    linksRow.appendChild(gradaLink);
+                // Add email title if available
+                if (entry.emailTitle && entry.emailTitle.trim() !== '') {
+                    const emailTitleDiv = document.createElement('div');
+                    emailTitleDiv.style.cssText = 'margin-top: 8px; font-size: 16px; color: #666; font-style: italic;';
+                    emailTitleDiv.textContent = `Email: ${entry.emailTitle}`;
+                    titleContainer.appendChild(emailTitleDiv);
                 }
 
-                const titleLink = document.createElement('a');
-                titleLink.textContent = entry.title || 'No Title';
-                titleLink.href = entry.url;
-                titleLink.target = '_blank';
-                titleLink.className = 'entry-title-link';
-                linksRow.appendChild(titleLink);
+                // Delete button container
+                const deleteContainer = document.createElement('div');
+                deleteContainer.style.cssText = 'margin-left: 15px;';
 
                 const deleteBtn = document.createElement('button');
                 deleteBtn.innerHTML = '🗑️';
                 deleteBtn.className = 'delete-btn icon-button';
-                deleteBtn.onclick = () => {
+                deleteBtn.onclick = async () => {
                     entries.splice(index, 1);
                     saveEntriesToDOM();
                     updateTitle();
+                    // Save changes to remote storage
+                    await saveData();
                 };
-                linksRow.appendChild(deleteBtn);
+                deleteContainer.appendChild(deleteBtn);
+
+                // Assemble the row
+                linksRow.appendChild(titleContainer);
+                linksRow.appendChild(deleteContainer);
+
+                // Property Details Section
+                const propertyDetails = document.createElement('div');
+                propertyDetails.className = 'property-details';
+                propertyDetails.style.cssText = 'background: #f8f9fa; padding: 10px; margin: 10px 0; border-radius: 6px; border: 1px solid #dee2e6;';
+
+                let detailsHTML = '<table style="width: 100%; border-collapse: collapse; font-size: 17px;">';
+
+                // Create address value with navigation links
+                let addressValue = entry.address || '';
+                if (entry.mapsMene || entry.mapsGrada) {
+                    addressValue += '<br/><div style="margin-top: 8px; display: flex; gap: 8px; align-items: center;"><span style="font-weight: bold; color: #333; margin-right: 8px;">Mape:</span>';
+                    if (entry.mapsMene) {
+                        addressValue += `<a href="${entry.mapsMene}" target="_blank" style="display: inline-block; padding: 6px 12px; background: #007bff; color: white; font-weight: bold; text-decoration: none; border-radius: 4px; font-size: 14px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#007bff'">Adis</a>`;
+                    }
+                    if (entry.mapsGrada) {
+                        addressValue += `<a href="${entry.mapsGrada}" target="_blank" style="display: inline-block; padding: 6px 12px; background: #007bff; color: white; font-weight: bold; text-decoration: none; border-radius: 4px; font-size: 14px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#007bff'">Centar</a>`;
+                    }
+                    addressValue += '</div>';
+                }
+
+                const details = [
+                    { key: 'address', label: 'Adresa', value: addressValue },
+                    { key: 'flache', label: 'Površina', value: entry.flache },
+                    { key: 'zimmer', label: 'Sobe', value: entry.zimmer },
+                    { key: 'preis', label: 'Cijena', value: entry.preis },
+                    { key: 'monatlicheBelastung', label: 'BK', value: entry.monatlicheBelastung },
+                    { key: 'wohnflache', label: 'Površina', value: entry.wohnflache },
+                    { key: 'baujahr', label: 'Godina', value: entry.baujahr },
+                    { key: 'bauart', label: 'Tip', value: entry.bauart }
+                ];
+
+                // Show all columns, even if empty
+                const visibleDetails = details;
+
+                if (visibleDetails.length > 0) {
+                    // Header row with labels
+                    detailsHTML += '<tr style="background: #e9ecef;">';
+                    visibleDetails.forEach(detail => {
+                        detailsHTML += `<th style="padding: 6px 8px; font-weight: bold; border: 1px solid #dee2e6; text-align: center;">${detail.label}</th>`;
+                    });
+                    detailsHTML += '</tr>';
+
+                    // Data row with values
+                    detailsHTML += '<tr style="background: #ffffff;">';
+                    visibleDetails.forEach(detail => {
+                        const cellValue = detail.value || ''; // Handle empty/undefined values
+                        if (detail.key === 'address') {
+                            // Allow HTML for address field (for navigation links)
+                            detailsHTML += `<td style="padding: 6px 8px; border: 1px solid #dee2e6; text-align: center;">${cellValue}</td>`;
+                        } else {
+                            // Escape HTML for other fields
+                            detailsHTML += `<td style="padding: 6px 8px; border: 1px solid #dee2e6; text-align: center;">${cellValue}</td>`;
+                        }
+                    });
+                    detailsHTML += '</tr>';
+                }
+
+                detailsHTML += '</table>';
+                propertyDetails.innerHTML = detailsHTML;
+
+                // Add summary section below the table if summary exists
+                if (entry.summary && entry.summary.trim() && entry.summary !== 'Sažetak nije dostupan' && entry.summary !== 'Greška pri generiranju sažetka') {
+                    const summaryDiv = document.createElement('div');
+                    summaryDiv.style.cssText = 'margin-top: 15px; padding: 10px; background: #f0f8ff; border-left: 4px solid #007bff; border-radius: 4px;';
+                    summaryDiv.innerHTML = `<div style="font-weight: bold; margin-bottom: 8px; color: #007bff; font-size: 18px;">Sažetak:</div><div style="font-size: 19px; line-height: 1.4; color: #333;">${entry.summary}</div>`;
+                    propertyDetails.appendChild(summaryDiv);
+                }
+
+                // Add image gallery if images exist
+                if (entry.images && entry.images.length > 0) {
+                    const galleryDiv = document.createElement('div');
+                    galleryDiv.style.cssText = 'margin-top: 15px;';
+
+                    // Gallery header
+                    const galleryHeader = document.createElement('div');
+                    galleryHeader.style.cssText = 'font-weight: bold; margin-bottom: 10px; color: #007bff; font-size: 18px;';
+                    galleryHeader.textContent = `Slike (${entry.images.length}):`;
+                    galleryDiv.appendChild(galleryHeader);
+
+                    // Thumbnail container
+                    const thumbnailContainer = document.createElement('div');
+                    thumbnailContainer.style.cssText = 'display: flex; gap: 8px; overflow-x: auto; padding: 5px 0; max-width: 100%;';
+
+                    entry.images.forEach((image, imgIndex) => {
+                        const thumbDiv = document.createElement('div');
+
+                        // Special styling for the special image (first one with isSpecial flag)
+                        const isSpecialImage = image.isSpecial === true;
+                        const borderColor = isSpecialImage ? '#007bff' : 'transparent';
+                        const borderWidth = isSpecialImage ? '3px' : '2px';
+
+                        thumbDiv.style.cssText = `flex-shrink: 0; cursor: pointer; border: ${borderWidth} solid ${borderColor}; border-radius: 4px; transition: border-color 0.2s;`;
+
+                        const thumbImg = document.createElement('img');
+                        thumbImg.src = image.thumb || image.src;
+                        thumbImg.style.cssText = 'width: 80px; height: 60px; object-fit: cover; border-radius: 4px; display: block;';
+                        thumbImg.alt = `Slika ${imgIndex + 1}${isSpecialImage ? ' (Posebna)' : ''}`;
+
+                        // Add hover effect (different for special image)
+                        if (isSpecialImage) {
+                            thumbDiv.onmouseenter = () => thumbDiv.style.borderColor = '#0056b3'; // Darker blue on hover
+                            thumbDiv.onmouseleave = () => thumbDiv.style.borderColor = '#007bff'; // Return to blue
+                        } else {
+                            thumbDiv.onmouseenter = () => thumbDiv.style.borderColor = '#007bff';
+                            thumbDiv.onmouseleave = () => thumbDiv.style.borderColor = 'transparent';
+                        }
+
+                        // Add click handler to open modal
+                        thumbDiv.onclick = () => openImageModal(entry.images, imgIndex, index);
+
+                        thumbDiv.appendChild(thumbImg);
+                        thumbnailContainer.appendChild(thumbDiv);
+                    });
+
+                    galleryDiv.appendChild(thumbnailContainer);
+                    propertyDetails.appendChild(galleryDiv);
+                }
 
                 // Adis Box
                 const adisBox = document.createElement('div');
                 adisBox.className = 'person-box adis';
+
+                const hasAdisComments = (entry.adisNegativno && entry.adisNegativno.trim()) || (entry.adisPozitivno && entry.adisPozitivno.trim());
+                const adisCommentStatus = hasAdisComments ? '<strong>Ima komentar</strong>' : 'Nema komentar';
+
                 adisBox.innerHTML = `
-                    <div class="person-header">
+                    <div class="person-header" onclick="toggleComments(this, 'adis-comments-${index}')" style="cursor: pointer;">
                         <div class="rating-buttons">
                             ${[1, 2, 3, 4, 5].map(i =>
-                    `<button class="rating-btn ${i == entry.adisOcjena ? 'selected' : ''}" disabled>${i}</button>`
+                    `<button class="rating-btn ${i == entry.adisOcjena ? 'selected' : ''}" data-rating="${i}" onclick="event.stopPropagation()">${i}</button>`
                 ).join('')}
                         </div>
+                        <div style="margin-left: 15px; display: flex; align-items: center; gap: 10px;">
+                            <span class="collapse-arrow collapsed" style="font-size: 36px; transition: transform 0.3s ease; color: #888;">▼</span>
+                            <span style="font-weight: bold; color: #333; font-size: 18px;">Adis</span>
+                            <span style="color: #666; font-size: 16px;">- ${adisCommentStatus}</span>
+                        </div>
                     </div>
-                    <div class="comment-row">
+                    <div id="adis-comments-${index}" class="comment-row collapsible-content collapsed" style="transition: max-height 0.3s ease; overflow: hidden; max-height: 0;">
                         <div class="comment-group">
                             <div class="comment-label">Negativni komentar</div>
-                            <div class="comment-display">${entry.adisNegativno || ''}</div>
+                            <textarea class="comment-input" data-entry-index="${index}" data-field="adisNegativno">${entry.adisNegativno || ''}</textarea>
                         </div>
                         <div class="comment-group">
                             <div class="comment-label">Pozitivni komentar</div>
-                            <div class="comment-display">${entry.adisPozitivno || ''}</div>
+                            <textarea class="comment-input" data-entry-index="${index}" data-field="adisPozitivno">${entry.adisPozitivno || ''}</textarea>
                         </div>
                     </div>
                 `;
 
+                // Add event listeners for Adis rating buttons
+                const adisRatingButtons = adisBox.querySelectorAll('.rating-buttons .rating-btn');
+                adisRatingButtons.forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        e.stopPropagation(); // Prevent triggering toggle
+                        adisRatingButtons.forEach(b => b.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        entries[index].adisOcjena = btn.dataset.rating;
+                        updateEntryModifiedDate(index);
+                        // Auto-save when rating changes
+                        await saveData();
+                    });
+                });
+
+                // Add event listeners for Adis comment textareas
+                const adisCommentTextareas = adisBox.querySelectorAll('textarea[data-field]');
+                adisCommentTextareas.forEach(textarea => {
+                    let saveTimeout;
+                    textarea.addEventListener('input', () => {
+                        const field = textarea.dataset.field;
+                        entries[index][field] = textarea.value;
+                        updateEntryModifiedDate(index);
+
+                        // Debounced auto-save (wait 2 seconds after last change)
+                        clearTimeout(saveTimeout);
+                        saveTimeout = setTimeout(async () => {
+                            await saveData();
+                        }, 2000);
+                    });
+                });
+
                 // Roditelji Box
                 const roditeljiBox = document.createElement('div');
                 roditeljiBox.className = 'person-box roditelji';
+
+                const hasRoditeljiComments = (entry.roditeljiNegativno && entry.roditeljiNegativno.trim()) || (entry.roditeljiPozitivno && entry.roditeljiPozitivno.trim());
+                const roditeljiCommentStatus = hasRoditeljiComments ? '<strong>Ima komentar</strong>' : 'Nema komentar';
+
                 roditeljiBox.innerHTML = `
-                    <div class="person-header">
+                    <div class="person-header" onclick="toggleComments(this, 'roditelji-comments-${index}')" style="cursor: pointer;">
                         <div class="rating-buttons" data-entry-index="${index}">
                             ${[1, 2, 3, 4, 5].map(i =>
-                    `<button class="rating-btn ${i == entry.roditeljiOcjena ? 'selected' : ''}" data-rating="${i}">${i}</button>`
+                    `<button class="rating-btn ${i == entry.roditeljiOcjena ? 'selected' : ''}" data-rating="${i}" onclick="event.stopPropagation()">${i}</button>`
                 ).join('')}
                         </div>
+                        <div style="margin-left: 15px; display: flex; align-items: center; gap: 10px;">
+                            <span class="collapse-arrow collapsed" style="font-size: 36px; transition: transform 0.3s ease; color: #888;">▼</span>
+                            <span style="font-weight: bold; color: #333; font-size: 18px;">Camila i Salih</span>
+                            <span style="color: #666; font-size: 16px;">- ${roditeljiCommentStatus}</span>
+                        </div>
                     </div>
-                    <div class="comment-row">
+                    <div id="roditelji-comments-${index}" class="comment-row collapsible-content collapsed" style="transition: max-height 0.3s ease; overflow: hidden; max-height: 0;">
                         <div class="comment-group">
                             <div class="comment-label">Negativni komentar</div>
                             <textarea class="comment-input" data-entry-index="${index}" data-field="roditeljiNegativno">${entry.roditeljiNegativno || ''}</textarea>
@@ -713,21 +932,31 @@
                 // Add event listeners for Roditelji rating buttons
                 const ratingButtons = roditeljiBox.querySelectorAll('.rating-buttons .rating-btn');
                 ratingButtons.forEach(btn => {
-                    btn.onclick = () => {
+                    btn.addEventListener('click', async (e) => {
+                        e.stopPropagation(); // Prevent triggering toggle
                         ratingButtons.forEach(b => b.classList.remove('selected'));
                         btn.classList.add('selected');
                         entries[index].roditeljiOcjena = btn.dataset.rating;
                         updateEntryModifiedDate(index);
-                    };
+                        // Auto-save when rating changes
+                        await saveData();
+                    });
                 });
 
                 // Add event listeners for Roditelji comment textareas
                 const commentTextareas = roditeljiBox.querySelectorAll('textarea[data-field]');
                 commentTextareas.forEach(textarea => {
+                    let saveTimeout;
                     textarea.addEventListener('input', () => {
                         const field = textarea.dataset.field;
                         entries[index][field] = textarea.value;
                         updateEntryModifiedDate(index);
+
+                        // Debounced auto-save (wait 2 seconds after last change)
+                        clearTimeout(saveTimeout);
+                        saveTimeout = setTimeout(async () => {
+                            await saveData();
+                        }, 2000);
                     });
                 });
 
@@ -735,8 +964,37 @@
                     wrapper.appendChild(dateInfo);
                 }
                 wrapper.appendChild(linksRow);
+                wrapper.appendChild(propertyDetails);
                 wrapper.appendChild(adisBox);
                 wrapper.appendChild(roditeljiBox);
+
+                // Add contact information if available
+                if (entry.kontaktIme || entry.kontaktTelefon || entry.kontaktEmail || entry.kontaktKompanija) {
+                    const contactDiv = document.createElement('div');
+                    contactDiv.style.cssText = 'margin-top: 15px; padding: 10px; font-size: 16px; text-align: right;';
+
+                    let contactInfo = '';
+
+                    if (entry.kontaktIme) {
+                        contactInfo += `<span style="font-weight: bold; margin-right: 15px;">${entry.kontaktIme}</span>`;
+                    }
+
+                    if (entry.kontaktKompanija) {
+                        contactInfo += `<span style="color: #666; margin-right: 15px;">${entry.kontaktKompanija}</span>`;
+                    }
+
+                    if (entry.kontaktTelefon) {
+                        contactInfo += `<a href="tel:${entry.kontaktTelefon}" style="color: #007bff; text-decoration: none; margin-right: 15px;">📞 ${entry.kontaktTelefon}</a>`;
+                    }
+
+                    if (entry.kontaktEmail) {
+                        contactInfo += `<a href="mailto:${entry.kontaktEmail}" style="color: #007bff; text-decoration: none;">✉️ ${entry.kontaktEmail}</a>`;
+                    }
+
+                    contactDiv.innerHTML = contactInfo;
+                    wrapper.appendChild(contactDiv);
+                }
+
                 entriesDiv.appendChild(wrapper);
             });
         }
@@ -759,52 +1017,219 @@
             };
         });
 
-        // Parse button functionality (search icon)
-        document.getElementById('search-btn').onclick = parseScrapedData;
 
-        document.getElementById('add-entry').onclick = () => {
-            const title = document.getElementById('new-title').value;
-            const url = document.getElementById('new-url').value;
-            const mapsMene = document.getElementById('new-maps-mene').value;
-            const mapsGrada = document.getElementById('new-maps-grada').value;
-            const adisNegativno = document.getElementById('adis-negativno').value;
-            const adisPozitivno = document.getElementById('adis-pozitivno').value;
 
-            if (!url || !selectedAdisRating) return;
+        // Image modal functions
+        function openImageModal(images, startIndex, entryIndex) {
+            currentImages = images;
+            currentImageIndex = startIndex;
 
-            const currentDate = getCurrentDateString();
-            entries.push({
-                title,
-                url,
-                mapsMene,
-                mapsGrada,
-                adisNegativno,
-                adisPozitivno,
-                adisOcjena: selectedAdisRating,
-                dateAdded: currentDate,
-                dateModified: currentDate,
-                // Default values for Roditelji
-                roditeljiNegativno: '',
-                roditeljiPozitivno: '',
-                roditeljiOcjena: null
-            });
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const imageCounter = document.getElementById('imageCounter');
 
-            // Clear form
-            document.getElementById('new-title').value = '';
-            document.getElementById('new-url').value = '';
-            document.getElementById('new-maps-mene').value = '';
-            document.getElementById('new-maps-grada').value = '';
-            document.getElementById('adis-negativno').value = '';
-            document.getElementById('adis-pozitivno').value = '';
-            document.getElementById('paste-data').value = '';
-            document.querySelectorAll('#adis-rating .rating-btn').forEach(b => b.classList.remove('selected'));
-            selectedAdisRating = null;
+            modalImage.src = images[startIndex].src;
+            imageCounter.textContent = `${startIndex + 1} / ${images.length}`;
 
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        function previousImage() {
+            if (currentImages.length === 0) return;
+            currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+            updateModalImage();
+        }
+
+        function nextImage() {
+            if (currentImages.length === 0) return;
+            currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+            updateModalImage();
+        }
+
+        function updateModalImage() {
+            const modalImage = document.getElementById('modalImage');
+            const imageCounter = document.getElementById('imageCounter');
+
+            modalImage.src = currentImages[currentImageIndex].src;
+            imageCounter.textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
+        }
+
+        // Keyboard navigation for modal
+        document.addEventListener('keydown', function (e) {
+            const modal = document.getElementById('imageModal');
+            if (modal.style.display === 'block') {
+                if (e.key === 'Escape') {
+                    closeImageModal();
+                } else if (e.key === 'ArrowLeft') {
+                    previousImage();
+                } else if (e.key === 'ArrowRight') {
+                    nextImage();
+                }
+            }
+        });
+
+        // Click outside image to close modal
+        document.getElementById('imageModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeImageModal();
+            }
+        });
+
+        // Update functionality
+        async function updateData() {
+            if (isLoading) return;
+
+            const updateBtn = document.getElementById('update-btn');
+            const originalText = updateBtn.textContent;
+
+            try {
+                updateBtn.textContent = 'Učitava...';
+                updateBtn.disabled = true;
+                setStatus('Dohvaćam najnovije podatke...', 'loading');
+
+                const currentCount = entries.length;
+
+                const response = await fetch(`${API_BASE}/${BIN_ID}`, {
+                    method: 'GET',
+                    headers: {
+                        'X-Master-Key': API_KEY
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                let loadedEntries = data.record || [];
+
+                // Filter out empty objects
+                loadedEntries = loadedEntries.filter(entry => entry && Object.keys(entry).length > 0 && (entry.url || entry.title));
+
+                // Calculate new entries added
+                newEntriesCount = Math.max(0, loadedEntries.length - currentCount);
+
+                // Track indices of new entries for green border styling
+                newEntryIndices.clear();
+                if (newEntriesCount > 0) {
+                    // New entries are at the end of the array (most recent)
+                    for (let i = currentCount; i < loadedEntries.length; i++) {
+                        newEntryIndices.add(i);
+                    }
+                }
+
+                entries = loadedEntries;
+                saveEntriesToDOM();
+                updateTitle();
+
+                if (newEntriesCount > 0) {
+                    setStatus(`Učitano ${newEntriesCount} novih unosa`);
+
+                    // Clear green borders after 30 seconds
+                    setTimeout(() => {
+                        newEntryIndices.clear();
+                        saveEntriesToDOM(); // Re-render without green borders
+                    }, 30000);
+                } else {
+                    setStatus('Nema novih unosa');
+                }
+
+            } catch (error) {
+                console.error('Error updating data:', error);
+                setStatus('Nije uspjelo, pokusaj opet', 'error');
+            } finally {
+                updateBtn.textContent = originalText;
+                updateBtn.disabled = false;
+            }
+        }
+
+        // Update button event listener
+        document.getElementById('update-btn').onclick = updateData;
+
+        // Auto-save functionality - no manual save button needed
+
+        // URL Replacement functionality
+        let urlReplacements = {};
+
+        // Load replacement mappings from localStorage
+        function loadUrlReplacements() {
+            const saved = localStorage.getItem('urlReplacements');
+            if (saved) {
+                urlReplacements = JSON.parse(saved);
+            }
+        }
+
+        // Save replacement mappings to localStorage
+        function saveUrlReplacements() {
+            localStorage.setItem('urlReplacements', JSON.stringify(urlReplacements));
+        }
+
+        // Apply URL replacements to a URL string
+        function applyUrlReplacements(url) {
+            let modifiedUrl = url;
+            for (const [oldString, newString] of Object.entries(urlReplacements)) {
+                if (oldString && newString) {
+                    modifiedUrl = modifiedUrl.replace(new RegExp(oldString, 'g'), newString);
+                }
+            }
+            return modifiedUrl;
+        }
+
+        // Toggle URL replacement panel
+        function toggleUrlReplacementPanel() {
+            const panel = document.getElementById('url-replacement-panel');
+            panel.classList.toggle('show');
+
+            // Load current values if panel is being shown
+            if (panel.classList.contains('show')) {
+                loadCurrentReplacementValues();
+            }
+        }
+
+        // Load current replacement values into inputs
+        function loadCurrentReplacementValues() {
+            const oldStringInput = document.getElementById('old-string');
+            const newStringInput = document.getElementById('new-string');
+
+            // Get the first replacement if any exists
+            const entries = Object.entries(urlReplacements);
+            if (entries.length > 0) {
+                oldStringInput.value = entries[0][0];
+                newStringInput.value = entries[0][1];
+            }
+        }
+
+        // Save replacement on input change
+        function saveCurrentReplacement() {
+            const oldString = document.getElementById('old-string').value.trim();
+            const newString = document.getElementById('new-string').value.trim();
+
+            // Clear all previous replacements and set new one
+            urlReplacements = {};
+            if (oldString) {
+                urlReplacements[oldString] = newString;
+            }
+
+            saveUrlReplacements();
+
+            // Re-render entries to apply new replacements
             saveEntriesToDOM();
-            updateTitle();
-        };
+        }
 
-        document.getElementById('save-btn').onclick = saveData;
+        // Event listeners for URL replacement
+        document.getElementById('title').onclick = toggleUrlReplacementPanel;
+        document.getElementById('old-string').onblur = saveCurrentReplacement;
+        document.getElementById('new-string').onblur = saveCurrentReplacement;
+
+        // Initialize URL replacements
+        loadUrlReplacements();
 
         // Load data on page load
         loadData();
