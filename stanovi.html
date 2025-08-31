@@ -345,7 +345,7 @@
         }
 
         #status {
-            font-size: 28px;
+            font-size: 25px;
             color: #ffffff;
             padding: 7px;
             font-style: italic;
@@ -425,10 +425,11 @@
             <div class="header-top">
                 <div class="header-left">
                     <h2 id="title">Stanovi</h2>
+                    <div id="stats-info" style="font-size: 18px; color: #ffffff; margin-left: 10px;"></div>
                 </div>
                 <div class="header-center">
                     <button id="update-btn"
-                        style="background: #28a745; color: white; border: none; padding: 10px 21px; border-radius: 4px; font-size: 21px; cursor: pointer;"
+                        style="background: #28a745; color: white; border: none; padding: 10px 21px; border-radius: 4px; font-size: 28px; cursor: pointer;"
                         onmouseover="this.style.backgroundColor='#218838'"
                         onmouseout="this.style.backgroundColor='#28a745'">Updatiraj</button>
                 </div>
@@ -630,6 +631,72 @@
                 titleText += ` (+${newEntriesCount} novih)`;
             }
             title.textContent = titleText;
+
+            // Update stats info
+            updateStatsInfo();
+        }
+
+        function updateStatsInfo() {
+            const statsDiv = document.getElementById('stats-info');
+            if (!statsDiv) return;
+
+            // Count total apartments
+            const totalCount = entries.length;
+            let statsText = `Ukupno: ${totalCount} stanova`;
+
+            // Find duplicates by URL and title
+            const duplicates = findDuplicates();
+            if (duplicates.length > 0) {
+                statsText += ` | Duplikati: ${duplicates.length}`;
+
+                // Create detailed duplicates info
+                const duplicatesInfo = duplicates.map(dup =>
+                    `• ${dup.identifier} (${dup.count}x)`
+                ).join(', ');
+
+                statsText += ` (${duplicatesInfo})`;
+            }
+
+            statsDiv.textContent = statsText;
+        }
+
+        function findDuplicates() {
+            const seen = {};
+            const duplicates = [];
+
+            entries.forEach(entry => {
+                // Use URL as primary identifier, fall back to title
+                let identifier = entry.url || entry.title || 'Unknown';
+
+                // For PDF entries (no URL), use title
+                if (!entry.url && entry.title) {
+                    identifier = entry.title;
+                }
+
+                // Clean up identifier for comparison
+                identifier = identifier.trim();
+
+                if (seen[identifier]) {
+                    seen[identifier].count++;
+                } else {
+                    seen[identifier] = {
+                        identifier: identifier,
+                        count: 1,
+                        entries: [entry]
+                    };
+                }
+            });
+
+            // Return only entries that appear more than once
+            return Object.values(seen)
+                .filter(item => item.count > 1)
+                .map(item => ({
+                    identifier: item.identifier.length > 50 ?
+                        item.identifier.substring(0, 50) + '...' :
+                        item.identifier,
+                    count: item.count,
+                    fullIdentifier: item.identifier
+                }));
         }
 
 
