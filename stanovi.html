@@ -26,16 +26,66 @@
             z-index: -1;
         }
 
+        .main-container {
+            display: flex;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 40px auto 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
         #sidebar {
-            width: 60%;
-            margin: 0 auto;
+            width: 100%;
             overflow-y: auto;
             background: #315276ad;
             padding: 20px;
             box-sizing: border-box;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            margin-top: 40px;
+        }
+
+        #notifications-panel {
+            position: fixed;
+            top: 40px;
+            right: 20px;
+            width: 350px;
+            background: #315276ad;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        @media (max-width: 1400px) {
+            #notifications-panel {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                top: auto;
+                width: 320px;
+                max-height: 60vh;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                margin: 20px auto 0 auto;
+                padding: 0 10px;
+                max-width: 100%;
+            }
+
+            #notifications-panel {
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                width: 280px;
+                max-height: 50vh;
+            }
         }
 
         #delete-btn {
@@ -47,20 +97,28 @@
             border: 1px solid #ddd;
             border-radius: 6px;
             padding: 10px;
-            margin-bottom: 45px;
+            margin-top: 80px;
+            margin-bottom: 80px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             position: relative;
         }
 
-        .entry:not(:last-child)::after {
-            content: '';
+        .entry.highlighted {
+            border: 3px solid #dc3545 !important;
+            background: #fff5f5 !important;
+            box-shadow: 0 4px 16px rgba(220, 53, 69, 0.3) !important;
+        }
+
+        .date-separator {
             position: absolute;
-            bottom: -23px;
+            top: -58px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80%;
-            height: 1px;
-            background-color: #000;
+            color: white;
+            font-size: 37px;
+            font-weight: bold;
+            border-radius: 35px;
+            z-index: 2;
         }
 
         .entry.new-entry {
@@ -85,26 +143,34 @@
 
         .rating-buttons {
             display: flex;
-            gap: 5px;
+            gap: 7px;
+            margin-left: 4px;
         }
 
         .rating-btn {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             padding: 0;
-            font-size: 18px;
+            font-size: 24px;
             font-weight: bold;
-            background: #cfcfcf;
-            color: #333;
+            background: transparent;
+            border: none;
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .rating-btn:hover {
+            color: #ffc107;
+            transform: scale(1.1);
         }
 
         .rating-btn.selected {
-            background: #007BFF;
-            color: white;
+            color: #ffc107;
         }
 
         .rating-btn.selected:hover {
-            background: #0056b3;
+            color: #ff9800;
         }
 
         .entry-row a {
@@ -240,23 +306,13 @@
         }
 
         .person-box {
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            margin-top: 12px;
-            background: #f8f9fa;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-1px);
         }
 
         .person-box.adis {}
 
         .person-box.roditelji {}
-
-        .person-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
 
         .comment-row {
             display: flex;
@@ -266,6 +322,8 @@
 
         .comment-group {
             flex: 1;
+            padding-top: 3px;
+            margin-left: 6px;
         }
 
         .comment-label {
@@ -306,6 +364,28 @@
 
         .icon-button {
             font-size: 22px;
+        }
+
+        .delete-btn {
+            color: #dc3545;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 3px;
+            transition: background-color 0.2s ease;
+            font-size: 40px;
+            margin-top: -25px;
+        }
+
+        .delete-btn:hover {
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+
+        .star-filter-btn:hover {
+            color: #ffc107 !important;
+            transform: scale(1.1);
         }
 
 
@@ -363,9 +443,18 @@
 
         .person-header {
             transition: all 0.3s ease;
-            border-radius: 4px;
-            padding: 8px;
-            margin: -8px;
+            /* border-radius: 4px; */
+            /* padding: 8px; */
+            /* margin: -8px; */
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            /* border: 2px solid #ddd; */
+            /* border-radius: 8px; */
+            /* padding: 15px; */
+
+            /* margin-top: 12px; */
+            /* background: #f8f9fa; */
         }
 
         .person-header:hover {
@@ -416,42 +505,279 @@
             border-radius: 4px;
             font-size: 14px;
         }
+
+
+
+        /* Notification popup styles */
+        .ntfy-popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 10001;
+            max-width: 350px;
+            animation: slideInRight 0.3s ease-out;
+            cursor: pointer;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .ntfy-popup.error {
+            border-left-color: #f44336;
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+        }
+
+        .ntfy-popup.warning {
+            border-left-color: #ff9800;
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+        }
+
+        .ntfy-popup .ntfy-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .ntfy-popup .ntfy-message {
+            font-size: 14px;
+            line-height: 1.4;
+            white-space: pre-line;
+        }
+
+        .ntfy-popup .ntfy-close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        .ntfy-popup .ntfy-close:hover {
+            opacity: 1;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .ntfy-popup.hiding {
+            animation: slideOutRight 0.3s ease-in forwards;
+        }
     </style>
 </head>
 
 <body>
-    <div id="sidebar">
-        <div class="header-buttons">
-            <div class="header-top">
-                <div class="header-left">
-                    <h2 id="title">Stanovi</h2>
-                    <div id="stats-info" style="font-size: 18px; color: #ffffff; margin-left: 10px;"></div>
+    <div class="main-container">
+        <div id="sidebar">
+            <div class="header-buttons">
+                <div class="header-top">
+                    <div class="header-left">
+                        <div class="title-stats-container">
+                            <h2 id="title">Stanovi</h2>
+                            <span id="status" class="loading"
+                                style="font-size: 16px; color: #ffffff; margin-left: -6px; display: block;">Učitava...</span>
+                        </div>
+                    </div>
+                    <div class="header-center">
+                        <div id="stats-info" style="font-size: 18px; color: #ffffff;"></div>
+                    </div>
+                    <div class="header-right">
+                        <button id="update-btn"
+                            style="background: #28a745; color: white; border: none; padding: 10px 21px; border-radius: 4px; font-size: 20px; cursor: pointer;"
+                            onmouseover="this.style.backgroundColor='#218838'"
+                            onmouseout="this.style.backgroundColor='#28a745'">Obnovi</button>
+                    </div>
                 </div>
-                <div class="header-center">
-                    <button id="update-btn"
-                        style="background: #28a745; color: white; border: none; padding: 10px 21px; border-radius: 4px; font-size: 28px; cursor: pointer;"
-                        onmouseover="this.style.backgroundColor='#218838'"
-                        onmouseout="this.style.backgroundColor='#28a745'">Updatiraj</button>
-                </div>
-                <div class="header-right">
-                    <span id="status" class="loading">Učitava...</span>
+
+
+
+                <!-- URL Replacement Panel -->
+                <div id="url-replacement-panel" class="url-replacement-panel">
+                    <div class="replacement-input-group">
+                        <label for="old-string">Old String:</label>
+                        <input type="text" id="old-string" placeholder="Tekst za zamijenu">
+                    </div>
+                    <div class="replacement-input-group">
+                        <label for="new-string">New String:</label>
+                        <input type="text" id="new-string" placeholder="Novi tekst">
+                    </div>
                 </div>
             </div>
 
-            <!-- URL Replacement Panel -->
-            <div id="url-replacement-panel" class="url-replacement-panel">
-                <div class="replacement-input-group">
-                    <label for="old-string">Old String:</label>
-                    <input type="text" id="old-string" placeholder="Tekst za zamijenu">
+            <!-- Filtering Panel -->
+            <div id="filtering-panel"
+                style="padding-right: 15px; background: rgba(49, 82, 118, 0.15); border-radius: 8px; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <!-- Star Rating Filter -->
+                    <div id="star-filter" style="display: flex; gap: 5px;">
+                        <button class="star-filter-btn" data-rating="1"
+                            style="background: transparent; border: none; font-size: 24px; color: #ddd; cursor: pointer; transition: color 0.2s;">★</button>
+                        <button class="star-filter-btn" data-rating="2"
+                            style="background: transparent; border: none; font-size: 24px; color: #ddd; cursor: pointer; transition: color 0.2s;">★</button>
+                        <button class="star-filter-btn" data-rating="3"
+                            style="background: transparent; border: none; font-size: 24px; color: #ddd; cursor: pointer; transition: color 0.2s;">★</button>
+                        <button class="star-filter-btn" data-rating="4"
+                            style="background: transparent; border: none; font-size: 24px; color: #ddd; cursor: pointer; transition: color 0.2s;">★</button>
+                        <button class="star-filter-btn" data-rating="5"
+                            style="background: transparent; border: none; font-size: 24px; color: #ddd; cursor: pointer; transition: color 0.2s;">★</button>
+                    </div>
+
+                    <!-- Right-aligned checkbox filters -->
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <!-- Kontaktirao Filter -->
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="kontaktirao-filter"
+                                style="width: 18px; height: 18px; cursor: pointer;">
+                            <label for="kontaktirao-filter"
+                                style="font-weight: bold; color: #ffffff; font-size: 16px; cursor: pointer;">Kontaktirao</label>
+                        </div>
+
+                        <!-- Termin Filter -->
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="termin-filter"
+                                style="width: 18px; height: 18px; cursor: pointer;">
+                            <label for="termin-filter"
+                                style="font-weight: bold; color: #ffffff; font-size: 16px; cursor: pointer;">Ima
+                                termin</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="replacement-input-group">
-                    <label for="new-string">New String:</label>
-                    <input type="text" id="new-string" placeholder="Novi tekst">
+            </div>
+
+            <div id="entries"></div>
+        </div>
+
+        <div id="notifications-panel">
+            <div style="color: white; margin-bottom: 20px;">
+                <h3 style="margin: 0 0 15px 0; font-size: 20px; color: #ffffff;">📱 Notifikacije</h3>
+
+                <div
+                    style="display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; margin-bottom: 15px;">
+                    <div id="ntfy-status"
+                        style="color: #ffffff; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+                        <span id="ntfy-indicator">📶</span>
+                        <span id="ntfy-text">Spajam se...</span>
+                    </div>
+                </div>
+
+                <div id="notifications-list" style="max-height: 500px; overflow-y: auto;">
+                    <div style="color: #ccc; font-style: italic; text-align: center; padding: 20px;">
+                        Nema novih notifikacija
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <button onclick="clearNotifications()"
+                        style="width: 100%; background: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">
+                        🗑️ Obriši sve
+                    </button>
+                </div>
+            </div>
+
+            <!-- Testing Panel -->
+            <div id="testing-panel"
+                style="color: white; margin-top: 20px; padding-top: 20px; border-top: 2px solid rgba(255,255,255,0.3); display: none;">
+                <h3 style="margin: 0 0 15px 0; font-size: 18px; color: #ffffff;">🧪 Test Notifikacija</h3>
+
+                <!-- Predefined Templates -->
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 8px; font-size: 14px; color: #ddd;">Predefined
+                        šabloni:</label>
+                    <select id="template-select" onchange="loadTemplate()"
+                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background: white; margin-bottom: 10px;">
+                        <option value="">-- Izaberi šablon --</option>
+                        <option value="property">Novi Stan</option>
+                        <option value="error">Greška</option>
+                        <option value="warning">Upozorenje</option>
+                        <option value="info">Informacija</option>
+                        <option value="custom">HTML Test</option>
+                    </select>
+                </div>
+
+                <!-- Title Input -->
+                <div style="margin-bottom: 10px;">
+                    <label style="display: block; margin-bottom: 5px; font-size: 14px; color: #ddd;">Naslov:</label>
+                    <input type="text" id="test-title" placeholder="Test naslov..."
+                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+
+                <!-- Message Input -->
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-size: 14px; color: #ddd;">Poruka (HTML
+                        podržan):</label>
+                    <textarea id="test-message" rows="4" placeholder="Test poruka..."
+                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; resize: vertical; font-family: monospace; font-size: 12px; box-sizing: border-box;"></textarea>
+                </div>
+
+                <!-- Type Selection -->
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-size: 14px; color: #ddd;">Tip:</label>
+                    <select id="test-type"
+                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background: white;">
+                        <option value="info">Info (zeleno)</option>
+                        <option value="warning">Upozorenje (narandžasto)</option>
+                        <option value="error">Greška (crveno)</option>
+                    </select>
+                </div>
+
+                <!-- Send Button -->
+                <button onclick="sendTestNotification()"
+                    style="width: 100%; background: #007bff; color: white; border: none; padding: 10px 12px; border-radius: 4px; cursor: pointer; font-size: 14px; margin-bottom: 10px;">
+                    🚀 Pošalji Test Notifikaciju
+                </button>
+
+                <!-- Send to ntfy.sh Button -->
+                <button onclick="sendToNtfy()"
+                    style="width: 100%; background: #6f42c1; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; margin-bottom: 10px;">
+                    📤 Pošalji na ntfy.sh/stanovi
+                </button>
+
+                <!-- Troubleshooting Button -->
+                <button onclick="sendSimpleTest()"
+                    style="width: 100%; background: #ffc107; color: black; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; margin-bottom: 15px;">
+                    🔧 Pošalji Jednostavan Test
+                </button>
+
+                <!-- Debug Information -->
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <div style="font-size: 12px; color: #ccc; margin-bottom: 10px;">
+                        <strong>Debug Info:</strong><br>
+                        Topic: stanovi<br>
+                        URL: https://ntfy.sh/stanovi<br>
+                        Provjeri da li je Android app povezan na isti topic.
+                    </div>
+
+                    <button onclick="checkTopicStatus()"
+                        style="width: 100%; background: #17a2b8; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                        🔍 Provjeri Topic Status
+                    </button>
                 </div>
             </div>
         </div>
-
-        <div id="entries"></div>
     </div>
 
     <!-- Image Modal -->
@@ -479,9 +805,12 @@
         const title = document.getElementById('title');
         const status = document.getElementById('status');
 
-        // JSONBin.io configuration
+        // JSONBin.io configuration with fallback support
+        // Primary bin switches to fallback when >= 90KB (reserves space for comments)
+        // The app loads from both bins and merges the results
         const API_KEY = '$2a$10$S0dGVfegNTRBt2VRn91SNOImoGkyfcc8nfF1BtPfbnAXRjAyieFKi';
-        const BIN_ID = '686644268a456b7966ba8958';
+        const PRIMARY_BIN_ID = '686644268a456b7966ba8958';    // Original bin (full)
+        const FALLBACK_BIN_ID = '68b409ebae596e708fdd9573';   // New bin for overflow
         const API_BASE = 'https://api.jsonbin.io/v3/b';
 
         let entries = [];
@@ -501,7 +830,8 @@
             const date = new Date(dateString);
             const month = String(date.getMonth() + 1).padStart(2, '0');
             const day = String(date.getDate()).padStart(2, '0');
-            return `${month}.${day}`;
+            const year = date.getFullYear();
+            return `${day}.${month}.${year}`;
         }
 
         function getCurrentDateString() {
@@ -524,30 +854,73 @@
             }
         }
 
+
+
         async function loadData() {
             if (isLoading) return;
             isLoading = true;
             setStatus('Učitava...', 'loading', false);
 
             try {
-                const response = await fetch(`${API_BASE}/${BIN_ID}`, {
-                    method: 'GET',
-                    headers: {
-                        'X-Master-Key': API_KEY
-                    }
-                });
+                // Function to load entries from a specific bin
+                async function loadFromBin(binId) {
+                    const response = await fetch(`${API_BASE}/${binId}`, {
+                        method: 'GET',
+                        headers: {
+                            'X-Master-Key': API_KEY
+                        }
+                    });
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    return data.record || [];
                 }
 
-                const data = await response.json();
-                let loadedEntries = data.record || [];
+                // Load from both bins in parallel
+                console.log('Loading entries from both bins...');
+                const [primaryResult, fallbackResult] = await Promise.allSettled([
+                    loadFromBin(PRIMARY_BIN_ID),
+                    loadFromBin(FALLBACK_BIN_ID)
+                ]);
 
-                // Filter out empty objects (like {})
-                entries = loadedEntries.filter(entry => {
-                    return entry && Object.keys(entry).length > 0 && (entry.url || entry.title);
-                });
+                // Combine entries from both bins
+                let allEntries = [];
+
+                if (primaryResult.status === 'fulfilled') {
+                    allEntries = allEntries.concat(primaryResult.value);
+                    console.log(`Loaded ${primaryResult.value.length} entries from primary bin`);
+                } else {
+                    console.warn('Failed to load from primary bin:', primaryResult.reason);
+                }
+
+                if (fallbackResult.status === 'fulfilled') {
+                    allEntries = allEntries.concat(fallbackResult.value);
+                    console.log(`Loaded ${fallbackResult.value.length} entries from fallback bin`);
+                } else {
+                    console.warn('Failed to load from fallback bin:', fallbackResult.reason);
+                }
+
+                // Remove duplicates based on URL (in case same entry exists in both bins)
+                const uniqueEntries = [];
+                const seenUrls = new Set();
+
+                for (const entry of allEntries) {
+                    if (entry && Object.keys(entry).length > 0 && (entry.url || entry.title)) {
+                        if (entry.url && seenUrls.has(entry.url)) {
+                            console.log('Skipping duplicate entry:', entry.url);
+                            continue;
+                        }
+                        if (entry.url) {
+                            seenUrls.add(entry.url);
+                        }
+                        uniqueEntries.push(entry);
+                    }
+                }
+
+                entries = uniqueEntries;
 
                 // Clear new entry tracking on initial load
                 newEntryIndices.clear();
@@ -555,7 +928,28 @@
 
                 saveEntriesToDOM();
                 updateTitle();
-                setStatus('Podaci uspješno učitani');
+
+                // Create informative status message
+                // Log detailed loading information to console
+                const primaryCount = primaryResult.status === 'fulfilled' ? primaryResult.value.length : 0;
+                const fallbackCount = fallbackResult.status === 'fulfilled' ? fallbackResult.value.length : 0;
+                const duplicatesRemoved = allEntries.length - uniqueEntries.length;
+
+                let consoleMessage = `Učitano ${entries.length} stavki`;
+                if (primaryCount > 0 && fallbackCount > 0) {
+                    consoleMessage += ` (${primaryCount} + ${fallbackCount} iz 2 baze`;
+                    if (duplicatesRemoved > 0) {
+                        consoleMessage += `, ${duplicatesRemoved} duplikata uklonjeno`;
+                    }
+                    consoleMessage += ')';
+                } else if (primaryCount > 0) {
+                    consoleMessage += ` (glavna baza)`;
+                } else if (fallbackCount > 0) {
+                    consoleMessage += ` (rezervna baza)`;
+                }
+
+                console.log(consoleMessage);
+                setStatus('Podaci učitani');
             } catch (error) {
                 console.error('Error loading data:', error);
                 setStatus('Nije uspjelo, pokusaj opet', 'error');
@@ -576,7 +970,7 @@
                 // If no entries, save [{}] instead of empty array
                 const dataToSave = entries.length === 0 ? [{}] : entries;
 
-                const response = await fetch(`${API_BASE}/${BIN_ID}`, {
+                const response = await fetch(`${API_BASE}/${PRIMARY_BIN_ID}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -627,9 +1021,14 @@
             const date = `${day}.${month}.${year}`;
 
             let titleText = `Stanovi ${entries.length > 0 ? date : ''}`;
+
+            // Add count information in the new format
             if (newEntriesCount > 0) {
-                titleText += ` (+${newEntriesCount} novih)`;
+                titleText += ` (+${newEntriesCount} novih, ${entries.length} total)`;
+            } else if (entries.length > 0) {
+                titleText += ` (${entries.length} total)`;
             }
+
             title.textContent = titleText;
 
             // Update stats info
@@ -640,14 +1039,11 @@
             const statsDiv = document.getElementById('stats-info');
             if (!statsDiv) return;
 
-            // Count total apartments
-            const totalCount = entries.length;
-            let statsText = `Ukupno: ${totalCount} stanova`;
-
-            // Find duplicates by URL and title
+            // Only show duplicates info if there are any
+            let statsText = '';
             const duplicates = findDuplicates();
             if (duplicates.length > 0) {
-                statsText += ` | Duplikati: ${duplicates.length}`;
+                statsText = `Duplikati: ${duplicates.length}`;
 
                 // Create detailed duplicates info
                 const duplicatesInfo = duplicates.map(dup =>
@@ -709,14 +1105,34 @@
             entriesDiv.innerHTML = '';
             // Display entries in reverse order (newest first) but keep original indices
             const reversedEntries = [...entries].reverse();
+            let lastDisplayedDate = null;
+
             reversedEntries.forEach((entry, reverseIndex) => {
                 const index = entries.length - 1 - reverseIndex; // Get original index
                 const wrapper = document.createElement('div');
                 wrapper.className = 'entry';
+                wrapper.dataset.entryIndex = index;
+
+                // Add ID based on URL hash for anchor functionality
+                const urlHash = generateUrlHash(entry.url);
+                if (urlHash) {
+                    wrapper.id = urlHash;
+                }
 
                 // Add green border if this is a new entry
                 if (newEntryIndices.has(index)) {
                     wrapper.classList.add('new-entry');
+                }
+
+                // Check if this entry has a different date than the previous one
+                const entryDate = entry.dateAdded ? formatDate(entry.dateAdded) : null;
+                if (entryDate && entryDate !== lastDisplayedDate) {
+                    // Create date separator
+                    const dateSeparator = document.createElement('div');
+                    dateSeparator.className = 'date-separator';
+                    dateSeparator.textContent = entryDate;
+                    wrapper.appendChild(dateSeparator);
+                    lastDisplayedDate = entryDate;
                 }
 
                 // Date info
@@ -747,12 +1163,16 @@
                     titleLink.target = '_blank';
                     titleLink.className = 'entry-title-link';
                     titleContainer.appendChild(titleLink);
+
+
                 } else {
                     const titleSpan = document.createElement('span');
                     titleSpan.textContent = `PDF: ${entry.title || 'Bez naslova'}`;
                     titleSpan.className = 'entry-title-link';
                     titleSpan.style.cssText = 'font-weight: bold; font-size: 24px; color: #333; text-decoration: none;';
                     titleContainer.appendChild(titleSpan);
+
+
                 }
 
                 // Add email title if available
@@ -768,7 +1188,7 @@
                 deleteContainer.style.cssText = 'margin-left: 15px;';
 
                 const deleteBtn = document.createElement('button');
-                deleteBtn.innerHTML = '🗑️';
+                deleteBtn.innerHTML = '×';
                 deleteBtn.className = 'delete-btn icon-button';
                 deleteBtn.onclick = async () => {
                     entries.splice(index, 1);
@@ -851,22 +1271,29 @@
                     propertyDetails.appendChild(summaryDiv);
                 }
 
-                // Add image gallery if images exist
-                if (entry.images && entry.images.length > 0) {
+                // Add image gallery if valid images exist
+                const validImages = entry.images ? entry.images.filter(image =>
+                    image && (image.src || image.thumb) &&
+                    image.src !== 'undefined' && image.thumb !== 'undefined' &&
+                    image.src !== null && image.thumb !== null &&
+                    image.src !== '' && image.thumb !== ''
+                ) : [];
+
+                if (validImages.length > 0) {
                     const galleryDiv = document.createElement('div');
                     galleryDiv.style.cssText = 'margin-top: 15px;';
 
                     // Gallery header
                     const galleryHeader = document.createElement('div');
                     galleryHeader.style.cssText = 'font-weight: bold; margin-bottom: 10px; color: #007bff; font-size: 18px;';
-                    galleryHeader.textContent = `Slike (${entry.images.length}):`;
+                    galleryHeader.textContent = `Slike (${validImages.length}):`;
                     galleryDiv.appendChild(galleryHeader);
 
                     // Thumbnail container
                     const thumbnailContainer = document.createElement('div');
                     thumbnailContainer.style.cssText = 'display: flex; gap: 8px; overflow-x: auto; padding: 5px 0; max-width: 100%;';
 
-                    entry.images.forEach((image, imgIndex) => {
+                    validImages.forEach((image, imgIndex) => {
                         const thumbDiv = document.createElement('div');
 
                         // Special styling for the special image (first one with isSpecial flag)
@@ -890,8 +1317,9 @@
                             thumbDiv.onmouseleave = () => thumbDiv.style.borderColor = 'transparent';
                         }
 
-                        // Add click handler to open modal
-                        thumbDiv.onclick = () => openImageModal(entry.images, imgIndex, index);
+                        // Add click handler to open modal (use original index in entry.images)
+                        const originalIndex = entry.images.indexOf(image);
+                        thumbDiv.onclick = () => openImageModal(entry.images, originalIndex, index);
 
                         thumbDiv.appendChild(thumbImg);
                         thumbnailContainer.appendChild(thumbDiv);
@@ -906,19 +1334,19 @@
                 adisBox.className = 'person-box adis';
 
                 const hasAdisComments = (entry.adisNegativno && entry.adisNegativno.trim()) || (entry.adisPozitivno && entry.adisPozitivno.trim());
-                const adisCommentStatus = hasAdisComments ? '<strong>Ima komentar</strong>' : 'Nema komentar';
+                const adisCommentStatus = hasAdisComments ? '<strong style="color: #dc3545;">Ima komentar</strong>' : 'Nema komentar';
 
                 adisBox.innerHTML = `
-                    <div class="person-header" onclick="toggleComments(this, 'adis-comments-${index}')" style="cursor: pointer;">
-                        <div class="rating-buttons">
-                            ${[1, 2, 3, 4, 5].map(i =>
-                    `<button class="rating-btn ${i == entry.adisOcjena ? 'selected' : ''}" data-rating="${i}" onclick="event.stopPropagation()">${i}</button>`
-                ).join('')}
-                        </div>
-                        <div style="margin-left: 15px; display: flex; align-items: center; gap: 10px;">
-                            <span class="collapse-arrow collapsed" style="font-size: 36px; transition: transform 0.3s ease; color: #888;">▼</span>
+                    <div class="person-header" onclick="toggleComments(this, 'adis-comments-${index}')" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="collapse-arrow collapsed" style="font-size: 30px; transition: transform 0.3s ease; color: #888;">▼</span>
                             <span style="font-weight: bold; color: #333; font-size: 18px;">Adis</span>
                             <span style="color: #666; font-size: 16px;">- ${adisCommentStatus}</span>
+                        </div>
+                        <div class="rating-buttons" style="display: flex; justify-content: flex-end;">
+                            ${[1, 2, 3, 4, 5].map(i =>
+                    `<button class="rating-btn ${i <= entry.adisOcjena ? 'selected' : ''}" data-rating="${i}" onclick="event.stopPropagation()">★</button>`
+                ).join('')}
                         </div>
                     </div>
                     <div id="adis-comments-${index}" class="comment-row collapsible-content collapsed" style="transition: max-height 0.3s ease; overflow: hidden; max-height: 0;">
@@ -938,12 +1366,28 @@
                 adisRatingButtons.forEach(btn => {
                     btn.addEventListener('click', async (e) => {
                         e.stopPropagation(); // Prevent triggering toggle
+                        const clickedRating = parseInt(btn.dataset.rating);
+
+                        // Remove all selected classes
                         adisRatingButtons.forEach(b => b.classList.remove('selected'));
-                        btn.classList.add('selected');
-                        entries[index].adisOcjena = btn.dataset.rating;
+
+                        // Add selected class to all stars up to and including clicked star
+                        adisRatingButtons.forEach((b, i) => {
+                            if (i + 1 <= clickedRating) {
+                                b.classList.add('selected');
+                            }
+                        });
+
+                        const oldRating = entries[index].adisOcjena;
+                        const newRating = clickedRating;
+                        entries[index].adisOcjena = newRating;
                         updateEntryModifiedDate(index);
                         // Auto-save when rating changes
                         await saveData();
+                        // Send notification only if rating actually changed
+                        if (oldRating !== newRating) {
+                            await sendCommentRatingNotification(index, 'rating', 'Adis', null, newRating);
+                        }
                     });
                 });
 
@@ -951,9 +1395,13 @@
                 const adisCommentTextareas = adisBox.querySelectorAll('textarea[data-field]');
                 adisCommentTextareas.forEach(textarea => {
                     let saveTimeout;
+                    let notificationTimeout;
+                    const originalValue = textarea.value;
+
                     textarea.addEventListener('input', () => {
                         const field = textarea.dataset.field;
-                        entries[index][field] = textarea.value;
+                        const newValue = textarea.value;
+                        entries[index][field] = newValue;
                         updateEntryModifiedDate(index);
 
                         // Debounced auto-save (wait 2 seconds after last change)
@@ -961,6 +1409,15 @@
                         saveTimeout = setTimeout(async () => {
                             await saveData();
                         }, 2000);
+
+                        // Debounced notification (wait 3 seconds after last change)
+                        clearTimeout(notificationTimeout);
+                        notificationTimeout = setTimeout(async () => {
+                            // Only send notification if there's actual content and it changed from original
+                            if (newValue.trim() && newValue.trim() !== originalValue.trim()) {
+                                await sendCommentRatingNotification(index, 'comment', 'Adis', field);
+                            }
+                        }, 3000);
                     });
                 });
 
@@ -969,19 +1426,19 @@
                 roditeljiBox.className = 'person-box roditelji';
 
                 const hasRoditeljiComments = (entry.roditeljiNegativno && entry.roditeljiNegativno.trim()) || (entry.roditeljiPozitivno && entry.roditeljiPozitivno.trim());
-                const roditeljiCommentStatus = hasRoditeljiComments ? '<strong>Ima komentar</strong>' : 'Nema komentar';
+                const roditeljiCommentStatus = hasRoditeljiComments ? '<strong style="color: #dc3545;">Ima komentar</strong>' : 'Nema komentar';
 
                 roditeljiBox.innerHTML = `
-                    <div class="person-header" onclick="toggleComments(this, 'roditelji-comments-${index}')" style="cursor: pointer;">
-                        <div class="rating-buttons" data-entry-index="${index}">
-                            ${[1, 2, 3, 4, 5].map(i =>
-                    `<button class="rating-btn ${i == entry.roditeljiOcjena ? 'selected' : ''}" data-rating="${i}" onclick="event.stopPropagation()">${i}</button>`
-                ).join('')}
-                        </div>
-                        <div style="margin-left: 15px; display: flex; align-items: center; gap: 10px;">
-                            <span class="collapse-arrow collapsed" style="font-size: 36px; transition: transform 0.3s ease; color: #888;">▼</span>
+                    <div class="person-header" onclick="toggleComments(this, 'roditelji-comments-${index}')" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="collapse-arrow collapsed" style="font-size: 30px; transition: transform 0.3s ease; color: #888;">▼</span>
                             <span style="font-weight: bold; color: #333; font-size: 18px;">Camila i Salih</span>
                             <span style="color: #666; font-size: 16px;">- ${roditeljiCommentStatus}</span>
+                        </div>
+                        <div class="rating-buttons" data-entry-index="${index}" style="display: flex; justify-content: flex-end;">
+                            ${[1, 2, 3, 4, 5].map(i =>
+                    `<button class="rating-btn ${i <= entry.roditeljiOcjena ? 'selected' : ''}" data-rating="${i}" onclick="event.stopPropagation()">★</button>`
+                ).join('')}
                         </div>
                     </div>
                     <div id="roditelji-comments-${index}" class="comment-row collapsible-content collapsed" style="transition: max-height 0.3s ease; overflow: hidden; max-height: 0;">
@@ -1001,12 +1458,25 @@
                 ratingButtons.forEach(btn => {
                     btn.addEventListener('click', async (e) => {
                         e.stopPropagation(); // Prevent triggering toggle
+                        const clickedRating = parseInt(btn.dataset.rating);
+
+                        // Remove all selected classes
                         ratingButtons.forEach(b => b.classList.remove('selected'));
-                        btn.classList.add('selected');
-                        entries[index].roditeljiOcjena = btn.dataset.rating;
+
+                        // Add selected class to all stars up to and including clicked star
+                        ratingButtons.forEach((b, i) => {
+                            if (i + 1 <= clickedRating) {
+                                b.classList.add('selected');
+                            }
+                        });
+
+                        const newRating = clickedRating;
+                        entries[index].roditeljiOcjena = newRating;
                         updateEntryModifiedDate(index);
                         // Auto-save when rating changes
                         await saveData();
+                        // Send ntfy notification
+                        await sendCommentRatingNotification(index, 'rating', 'Roditelji', null, newRating);
                     });
                 });
 
@@ -1014,6 +1484,7 @@
                 const commentTextareas = roditeljiBox.querySelectorAll('textarea[data-field]');
                 commentTextareas.forEach(textarea => {
                     let saveTimeout;
+                    let notificationTimeout;
                     textarea.addEventListener('input', () => {
                         const field = textarea.dataset.field;
                         entries[index][field] = textarea.value;
@@ -1024,6 +1495,14 @@
                         saveTimeout = setTimeout(async () => {
                             await saveData();
                         }, 2000);
+
+                        // Debounced notification (wait 3 seconds after last change to avoid spam)
+                        clearTimeout(notificationTimeout);
+                        notificationTimeout = setTimeout(async () => {
+                            if (textarea.value.trim()) { // Only send notification if comment is not empty
+                                await sendCommentRatingNotification(index, 'comment', 'Roditelji', field);
+                            }
+                        }, 3000);
                     });
                 });
 
@@ -1035,10 +1514,85 @@
                 wrapper.appendChild(adisBox);
                 wrapper.appendChild(roditeljiBox);
 
+                // Add Termin section
+                const terminDiv = document.createElement('div');
+                terminDiv.className = 'termin';
+                terminDiv.style.cssText = 'margin-top: 2px; padding: 2px; display: flex; align-items: center; gap: 15px; justify-content: flex-end;';
+
+                // Checkbox for "Kontaktirao"
+                const checkboxContainer = document.createElement('div');
+                checkboxContainer.style.cssText = 'display: flex; align-items: center; gap: 5px;';
+
+                const kontaktiraoCheckbox = document.createElement('input');
+                kontaktiraoCheckbox.type = 'checkbox';
+                kontaktiraoCheckbox.id = `kontaktirao-${index}`;
+                kontaktiraoCheckbox.checked = entry.kontaktirao || false;
+                kontaktiraoCheckbox.style.cssText = 'margin: 0; width: 18px; height: 18px; cursor: pointer;';
+
+                const kontaktiraoLabel = document.createElement('label');
+                kontaktiraoLabel.htmlFor = `kontaktirao-${index}`;
+                kontaktiraoLabel.textContent = 'Kontaktirao';
+                kontaktiraoLabel.style.cssText = 'font-weight: bold; color: #333; margin: 0; cursor: pointer;';
+
+                checkboxContainer.appendChild(kontaktiraoLabel);
+                checkboxContainer.appendChild(kontaktiraoCheckbox);
+
+                // Date input for "Termin"
+                const terminContainer = document.createElement('div');
+                terminContainer.style.cssText = 'display: flex; align-items: center; gap: 5px;';
+
+                const terminLabel = document.createElement('label');
+                terminLabel.htmlFor = `termin-${index}`;
+                terminLabel.textContent = 'Termin:';
+                terminLabel.style.cssText = 'font-weight: bold; color: #333; margin: 0;';
+
+                const terminInput = document.createElement('input');
+                terminInput.type = 'date';
+                terminInput.id = `termin-${index}`;
+                terminInput.value = entry.termin || '';
+                terminInput.style.cssText = 'padding: 4px 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;';
+
+                terminContainer.appendChild(terminLabel);
+                terminContainer.appendChild(terminInput);
+
+                terminDiv.appendChild(checkboxContainer);
+                terminDiv.appendChild(terminContainer);
+
+                // Add event listeners for notifications
+                kontaktiraoCheckbox.addEventListener('change', async () => {
+                    const oldValue = entries[index].kontaktirao;
+                    const newValue = kontaktiraoCheckbox.checked;
+                    entries[index].kontaktirao = newValue;
+                    updateEntryModifiedDate(index);
+                    await saveData();
+
+                    // Send notification if value changed
+                    if (oldValue !== newValue) {
+                        const statusText = newValue ? 'kontaktirao agenta' : 'otkazao kontakt sa agentom';
+                        await sendContactTerminNotification(index, 'kontaktirao', statusText);
+                    }
+                });
+
+                terminInput.addEventListener('change', async () => {
+                    const oldValue = entries[index].termin;
+                    const newValue = terminInput.value;
+                    entries[index].termin = newValue;
+                    updateEntryModifiedDate(index);
+                    await saveData();
+
+                    // Send notification if value changed
+                    if (oldValue !== newValue) {
+                        const statusText = newValue ? `zakazao termin za ${newValue}` : 'uklonio termin';
+                        await sendContactTerminNotification(index, 'termin', statusText);
+                    }
+                });
+
+                wrapper.appendChild(terminDiv);
+
                 // Add contact information if available
                 if (entry.kontaktIme || entry.kontaktTelefon || entry.kontaktEmail || entry.kontaktKompanija) {
                     const contactDiv = document.createElement('div');
-                    contactDiv.style.cssText = 'margin-top: 15px; padding: 10px; font-size: 16px; text-align: right;';
+                    contactDiv.style.cssText = 'padding: 2px; font-size: 16px; text-align: right;';
 
                     let contactInfo = '';
 
@@ -1163,7 +1717,7 @@
 
                 const currentCount = entries.length;
 
-                const response = await fetch(`${API_BASE}/${BIN_ID}`, {
+                const response = await fetch(`${API_BASE}/${PRIMARY_BIN_ID}`, {
                     method: 'GET',
                     headers: {
                         'X-Master-Key': API_KEY
@@ -1298,8 +1852,741 @@
         // Initialize URL replacements
         loadUrlReplacements();
 
+        // Function to generate hash from URL
+        function generateUrlHash(url) {
+            if (!url) return null;
+            // Simple hash function using the URL
+            let hash = 0;
+            for (let i = 0; i < url.length; i++) {
+                const char = url.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32-bit integer
+            }
+            return 'entry-' + Math.abs(hash).toString(16);
+        }
+
+        // Function to highlight entry based on URL hash
+        function highlightEntryFromHash() {
+            const hash = window.location.hash.substring(1); // Remove the #
+            if (hash) {
+                // Remove existing highlights
+                document.querySelectorAll('.entry.highlighted').forEach(el => {
+                    el.classList.remove('highlighted');
+                });
+
+                // Highlight the target entry
+                const targetEntry = document.getElementById(hash);
+                if (targetEntry) {
+                    targetEntry.classList.add('highlighted');
+                    targetEntry.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        }
+
+        // Listen for hash changes
+        window.addEventListener('hashchange', highlightEntryFromHash);
+        window.addEventListener('load', highlightEntryFromHash);
+
+        // NTFY.SH Notification System
+        let ntfyWebSocket = null;
+        let ntfyReconnectTimeout = null;
+        let ntfyReconnectAttempts = 0;
+        const maxReconnectAttempts = 5;
+
+        function updateNtfyStatus(text, connected = false) {
+            const indicator = document.getElementById('ntfy-indicator');
+            const textElement = document.getElementById('ntfy-text');
+
+            if (textElement) textElement.textContent = text;
+            if (indicator) {
+                indicator.textContent = connected ? '🟢' : '🔴';
+            }
+        }
+
+        let notificationHistory = [];
+
+        // Function to convert URLs in text to clickable links
+        function makeLinksClickable(text) {
+            // Regular expression to match URLs
+            const urlRegex = /(https?:\/\/[^\s\n]+)/g;
+            return text.replace(urlRegex, '<a href="$1" target="_blank" style="color: #87CEEB; text-decoration: underline;">$1</a>');
+        }
+
+        function addToNotificationsList(title, message, type = 'info') {
+            const notificationsList = document.getElementById('notifications-list');
+            const timestamp = new Date().toLocaleTimeString('hr-HR');
+
+            // Add to history
+            notificationHistory.unshift({ title, message, type, timestamp });
+
+            // Clear "no notifications" message
+            if (notificationsList.querySelector('div[style*="Nema novih notifikacija"]')) {
+                notificationsList.innerHTML = '';
+            }
+
+            const notificationItem = document.createElement('div');
+            notificationItem.style.cssText = `
+                background: rgba(255,255,255,0.1);
+                border-radius: 8px;
+                padding: 12px;
+                margin-bottom: 10px;
+                border-left: 4px solid ${type === 'error' ? '#f44336' : type === 'warning' ? '#ff9800' : '#4CAF50'};
+                position: relative;
+            `;
+
+            // Make links clickable in the message
+            const processedMessage = makeLinksClickable(message);
+
+            // Create delete button
+            const deleteBtn = document.createElement('button');
+            deleteBtn.innerHTML = '×';
+            deleteBtn.style.cssText = `
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                background: rgba(255,255,255,0.2);
+                border: none;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                color: white;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+                transition: background-color 0.2s ease;
+            `;
+
+            // Add hover effects
+            deleteBtn.addEventListener('mouseenter', () => {
+                deleteBtn.style.backgroundColor = 'rgba(255,255,255,0.3)';
+            });
+            deleteBtn.addEventListener('mouseleave', () => {
+                deleteBtn.style.backgroundColor = 'rgba(255,255,255,0.2)';
+            });
+
+            // Add click handler to delete this notification
+            deleteBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+                // Remove from DOM with animation
+                notificationItem.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                notificationItem.style.opacity = '0';
+                notificationItem.style.transform = 'translateX(100%)';
+
+                setTimeout(() => {
+                    if (notificationItem.parentNode) {
+                        notificationItem.parentNode.removeChild(notificationItem);
+
+                        // Remove from history array
+                        const itemIndex = Array.from(notificationsList.children).indexOf(notificationItem);
+                        if (itemIndex >= 0 && itemIndex < notificationHistory.length) {
+                            notificationHistory.splice(itemIndex, 1);
+                        }
+
+                        // Show "no notifications" message if list is empty
+                        if (notificationsList.children.length === 0) {
+                            notificationsList.innerHTML = `
+                                <div style="color: #ccc; font-style: italic; text-align: center; padding: 20px;">
+                                    Nema novih notifikacija
+                                </div>
+                            `;
+                        }
+                    }
+                }, 300);
+            });
+
+            notificationItem.innerHTML = `
+                <div style="font-weight: bold; font-size: 14px; margin-bottom: 5px; color: white; margin-right: 25px;">${title}</div>
+                <div style="font-size: 13px; line-height: 1.4; color: #ddd; white-space: pre-line; margin-right: 25px;">${processedMessage}</div>
+                <div style="font-size: 11px; color: #aaa; margin-top: 8px;">${timestamp}</div>
+            `;
+
+            // Append delete button after setting innerHTML
+            notificationItem.appendChild(deleteBtn);
+
+            notificationsList.insertBefore(notificationItem, notificationsList.firstChild);
+
+            // Limit to 50 notifications
+            while (notificationsList.children.length > 50) {
+                notificationsList.removeChild(notificationsList.lastChild);
+                // Also remove from history
+                if (notificationHistory.length > 50) {
+                    notificationHistory.splice(50);
+                }
+            }
+        }
+
+        function clearNotifications() {
+            const notificationsList = document.getElementById('notifications-list');
+            notificationsList.innerHTML = `
+                <div style="color: #ccc; font-style: italic; text-align: center; padding: 20px;">
+                    Nema novih notifikacija
+                </div>
+            `;
+            notificationHistory = [];
+        }
+
+        function showNtfyPopup(title, message, type = 'info') {
+            // Add to notifications list
+            addToNotificationsList(title, message, type);
+
+            // Remove existing popups
+            document.querySelectorAll('.ntfy-popup').forEach(popup => popup.remove());
+
+            const popup = document.createElement('div');
+            popup.className = `ntfy-popup ${type}`;
+
+            // Make links clickable in popup message too
+            const processedPopupMessage = makeLinksClickable(message);
+
+            popup.innerHTML = `
+                <div class="ntfy-close" onclick="this.parentElement.remove()">×</div>
+                <div class="ntfy-title">${title}</div>
+                <div class="ntfy-message">${processedPopupMessage}</div>
+            `;
+
+            document.body.appendChild(popup);
+
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                if (document.body.contains(popup)) {
+                    popup.classList.add('hiding');
+                    setTimeout(() => popup.remove(), 300);
+                }
+            }, 5000);
+
+            // Click to dismiss
+            popup.addEventListener('click', () => {
+                popup.classList.add('hiding');
+                setTimeout(() => popup.remove(), 300);
+            });
+        }
+
+        function connectToNtfy() {
+            if (ntfyWebSocket && (ntfyWebSocket.readyState === WebSocket.CONNECTING || ntfyWebSocket.readyState === WebSocket.OPEN)) {
+                return;
+            }
+
+            updateNtfyStatus('Spajam se...', false);
+            console.log('🔔 Connecting to ntfy.sh WebSocket...');
+
+            try {
+                // Use Server-Sent Events instead of WebSocket as it's more reliable
+                const eventSource = new EventSource('https://ntfy.sh/stanovi/sse');
+
+                eventSource.onopen = function () {
+                    console.log('🔔 Connected to ntfy.sh SSE');
+                    updateNtfyStatus('Povezan', true);
+                    ntfyReconnectAttempts = 0;
+
+                    // Clear any pending reconnect
+                    if (ntfyReconnectTimeout) {
+                        clearTimeout(ntfyReconnectTimeout);
+                        ntfyReconnectTimeout = null;
+                    }
+                };
+
+                eventSource.onmessage = function (event) {
+                    try {
+                        const data = JSON.parse(event.data);
+                        console.log('🔔 Received notification:', data);
+
+                        // Show popup notification
+                        if (data.title && data.message) {
+                            showNtfyPopup(data.title, data.message);
+
+                            // Show browser notification if permission granted
+                            if (Notification.permission === 'granted') {
+                                new Notification(data.title, {
+                                    body: data.message,
+                                    icon: '🏠'
+                                });
+                            }
+                        }
+                    } catch (error) {
+                        console.warn('🔔 Failed to parse notification:', error);
+                    }
+                };
+
+                eventSource.onerror = function (error) {
+                    console.error('🔔 ntfy.sh SSE error:', error);
+                    updateNtfyStatus('Greška', false);
+                    eventSource.close();
+
+                    // Attempt to reconnect
+                    if (ntfyReconnectAttempts < maxReconnectAttempts) {
+                        ntfyReconnectAttempts++;
+                        const delay = Math.min(1000 * Math.pow(2, ntfyReconnectAttempts), 30000);
+
+                        updateNtfyStatus(`Ponovo spajam (${ntfyReconnectAttempts}/${maxReconnectAttempts})...`, false);
+
+                        ntfyReconnectTimeout = setTimeout(() => {
+                            connectToNtfy();
+                        }, delay);
+                    } else {
+                        updateNtfyStatus('Neuspješno', false);
+                    }
+                };
+
+                // Store reference for cleanup
+                window.ntfyEventSource = eventSource;
+
+            } catch (error) {
+                console.error('🔔 Failed to connect to ntfy.sh:', error);
+                updateNtfyStatus('Greška', false);
+            }
+        }
+
+        // Request notification permission
+        if ('Notification' in window) {
+            if (Notification.permission === 'default') {
+                Notification.requestPermission().then(permission => {
+                    console.log('🔔 Notification permission:', permission);
+                });
+            }
+        }
+
+        // Testing Functions
+        const templates = {
+            property: {
+                title: "Novi Stan",
+                message: "🏠 Title: Moderni apartman u centru\nAddress: Mariahilfer Str. 123, 1070 Vienna\nPrice: €450,000\n\n🔗 https://htmlpreview.github.io/?https://github.com/HuaMua/stanovi/blob/main/stanovi.html#entry-abc123",
+                type: "info"
+            },
+            error: {
+                title: "Greška Sistema",
+                message: "❌ Neuspješno povezivanje sa JSONBin API\n\nMolimo pokušajte ponovo za nekoliko minuta.",
+                type: "error"
+            },
+            warning: {
+                title: "Upozorenje",
+                message: "⚠️ Baza podataka je skoro puna\n\nPreporučuje se arhiviranje starih unosa.",
+                type: "warning"
+            },
+            info: {
+                title: "Informacija",
+                message: "ℹ️ Sistem je uspješno ažuriran\n\nNove funkcionalnosti su dostupne.",
+                type: "info"
+            },
+            custom: {
+                title: "HTML Test",
+                message: "<b>Bold text</b>\n<i>Italic text</i>\n<u>Underlined text</u>\n\n<a href='#'>Link test</a>\n\n<span style='color: red;'>Crveni tekst</span>",
+                type: "info"
+            }
+        };
+
+        function loadTemplate() {
+            const select = document.getElementById('template-select');
+            const template = templates[select.value];
+
+            if (template) {
+                document.getElementById('test-title').value = template.title;
+                document.getElementById('test-message').value = template.message;
+                document.getElementById('test-type').value = template.type;
+            }
+        }
+
+        function sendTestNotification() {
+            const title = document.getElementById('test-title').value || 'Test Naslov';
+            const message = document.getElementById('test-message').value || 'Test poruka';
+            const type = document.getElementById('test-type').value;
+
+            // Show the notification locally
+            showNtfyPopup(title, message, type);
+
+            console.log('🧪 Test notification sent:', { title, message, type });
+        }
+
+        async function sendToNtfy() {
+            const title = document.getElementById('test-title').value || 'Test Naslov';
+            const message = document.getElementById('test-message').value || 'Test poruka';
+
+            try {
+                console.log('🚀 Sending to ntfy.sh with:', { title, message });
+
+                const response = await fetch('https://ntfy.sh/stanovi', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain; charset=utf-8',
+                        'Title': title,
+                        'Tags': 'test,stanovi',
+                        'Priority': '4',
+                        'Actions': 'view, Otvori stanovi.html, https://htmlpreview.github.io/?https://github.com/HuaMua/stanovi/blob/main/stanovi.html'
+                    },
+                    body: message
+                });
+
+                console.log('📡 Response status:', response.status);
+                console.log('📡 Response headers:', [...response.headers.entries()]);
+
+                if (response.ok) {
+                    const responseText = await response.text();
+                    console.log('📡 Response body:', responseText);
+                    showNtfyPopup('✅ Uspješno', 'Poruka je poslana na ntfy.sh/stanovi', 'info');
+                    console.log('✅ Message sent to ntfy.sh successfully');
+                } else {
+                    const errorText = await response.text();
+                    console.error('❌ Error response:', errorText);
+                    showNtfyPopup('❌ Greška', `Neuspješno slanje: ${response.status}`, 'error');
+                    console.error('❌ Failed to send to ntfy.sh:', response.status);
+                }
+            } catch (error) {
+                showNtfyPopup('❌ Greška', 'Neuspješno povezivanje sa ntfy.sh', 'error');
+                console.error('❌ Error sending to ntfy.sh:', error);
+            }
+        }
+
+        async function sendSimpleTest() {
+            try {
+                console.log('🔧 Sending simple test to ntfy.sh...');
+
+                const response = await fetch('https://ntfy.sh/stanovi', {
+                    method: 'POST',
+                    body: 'Test poruka sa Android app - ako vidis ovo, sve radi!'
+                });
+
+                console.log('📡 Simple test response:', response.status);
+
+                if (response.ok) {
+                    showNtfyPopup('✅ Test Poslat', 'Jednostavan test je poslat. Provjeri Android app!', 'info');
+                    console.log('✅ Simple test sent successfully');
+                } else {
+                    showNtfyPopup('❌ Test Neuspješan', `Status: ${response.status}`, 'error');
+                }
+            } catch (error) {
+                showNtfyPopup('❌ Test Error', 'Neuspješno slanje simple test', 'error');
+                console.error('❌ Simple test error:', error);
+            }
+        }
+
+        async function checkTopicStatus() {
+            try {
+                console.log('🔍 Checking topic status...');
+
+                // Try to fetch the topic page to see if it exists
+                const response = await fetch('https://ntfy.sh/stanovi', {
+                    method: 'GET'
+                });
+
+                console.log('📡 Topic status response:', response.status);
+
+                if (response.ok) {
+                    showNtfyPopup('✅ Topic OK', 'Topic "stanovi" postoji na ntfy.sh', 'info');
+
+                    // Send a ping message
+                    const pingResponse = await fetch('https://ntfy.sh/stanovi', {
+                        method: 'POST',
+                        headers: {
+                            'Title': 'Ping Test',
+                            'Tags': 'ping',
+                            'Priority': '1'
+                        },
+                        body: 'Ping test sa web stranice - ' + new Date().toLocaleTimeString()
+                    });
+
+                    if (pingResponse.ok) {
+                        console.log('✅ Ping sent successfully');
+                    }
+                } else {
+                    showNtfyPopup('❌ Topic Problem', `Topic response: ${response.status}`, 'error');
+                }
+            } catch (error) {
+                showNtfyPopup('❌ Check Error', 'Neuspješno provjera topic status', 'error');
+                console.error('❌ Topic check error:', error);
+            }
+        }
+
+        // Start ntfy connection when page loads
+        setTimeout(connectToNtfy, 1000);
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (window.ntfyEventSource) {
+                window.ntfyEventSource.close();
+            }
+            if (ntfyReconnectTimeout) {
+                clearTimeout(ntfyReconnectTimeout);
+            }
+        });
+
+        // Function to send notification for contact/termin changes
+        async function sendContactTerminNotification(entryIndex, changeType, statusText) {
+            try {
+                const entry = entries[entryIndex];
+                if (!entry) return;
+
+                const title = entry.title || 'Property';
+                const address = entry.address || 'Unknown address';
+
+                // Generate URL hash for the anchor
+                const url = entry.url || '';
+                let urlHash = null;
+                if (url) {
+                    let hash = 0;
+                    for (let i = 0; i < url.length; i++) {
+                        const char = url.charCodeAt(i);
+                        hash = ((hash << 5) - hash) + char;
+                        hash = hash & hash; // Convert to 32-bit integer
+                    }
+                    urlHash = 'entry-' + Math.abs(hash).toString(16);
+                }
+
+                const linkUrl = urlHash ?
+                    `https://htmlpreview.github.io/?https://github.com/HuaMua/stanovi/blob/main/stanovi.html#${urlHash}` :
+                    'https://htmlpreview.github.io/?https://github.com/HuaMua/stanovi/blob/main/stanovi.html';
+
+                // Create notification message
+                const notificationTitle = `Kontakt - ${changeType === 'kontaktirao' ? 'Status' : 'Termin'}`;
+                const notificationMessage = `📞 ${statusText}\n\n🏠 ${title}\n📍 ${address}\n\n🔗 ${linkUrl}`;
+
+                // Send notification
+                fetch('https://ntfy.sh/stanovi', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain; charset=utf-8',
+                        'Title': notificationTitle,
+                        'Tags': 'contact,termin',
+                        'Priority': '3',
+                        'Actions': 'view, Otvori stan, ' + linkUrl
+                    },
+                    body: notificationMessage
+                }).then(response => {
+                    if (response.ok) {
+                        console.log('📤 Contact/Termin notification sent successfully');
+                    } else {
+                        console.warn('⚠️ Failed to send contact/termin notification:', response.status);
+                    }
+                }).catch(error => {
+                    console.warn('⚠️ Failed to send contact/termin notification:', error);
+                });
+            } catch (error) {
+                console.warn('Failed to send contact/termin notification:', error);
+            }
+        }
+
+        // Function to send notification for comment/rating changes
+        async function sendCommentRatingNotification(entryIndex, changeType, person, field = null, value = null) {
+            try {
+                const entry = entries[entryIndex];
+                if (!entry) return;
+
+                const title = entry.title || 'Property';
+                const address = entry.address || 'Unknown address';
+
+                // Generate URL hash for the anchor
+                const url = entry.url || '';
+                let urlHash = null;
+                if (url) {
+                    let hash = 0;
+                    for (let i = 0; i < url.length; i++) {
+                        const char = url.charCodeAt(i);
+                        hash = ((hash << 5) - hash) + char;
+                        hash = hash & hash; // Convert to 32-bit integer
+                    }
+                    urlHash = 'entry-' + Math.abs(hash).toString(16);
+                }
+
+                const linkUrl = urlHash ?
+                    `https://htmlpreview.github.io/?https://github.com/HuaMua/stanovi/blob/main/stanovi.html#${urlHash}` :
+                    'https://htmlpreview.github.io/?https://github.com/HuaMua/stanovi/blob/main/stanovi.html';
+
+                // Create notification message based on change type
+                let notificationMessage = '';
+                let notificationTitle = '';
+
+                if (changeType === 'rating') {
+                    notificationTitle = `${person} - Ocjena`;
+                    notificationMessage = `⭐ ${person} je ocjenio stan sa ${value}/5\n\n🏠 ${title}\n📍 ${address}\n\n🔗 ${linkUrl}`;
+                } else if (changeType === 'comment') {
+                    const commentType = field === 'adisNegativno' || field === 'roditeljiNegativno' ? 'negativni' : 'pozitivni';
+                    notificationTitle = `${person} - Komentar`;
+                    notificationMessage = `💬 ${person} je dodao ${commentType} komentar\n\n🏠 ${title}\n📍 ${address}\n\n🔗 ${linkUrl}`;
+                }
+
+                // Send notification
+                fetch('https://ntfy.sh/stanovi', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain; charset=utf-8',
+                        'Title': notificationTitle,
+                        'Tags': 'comment,rating',
+                        'Priority': '3',
+                        'Actions': 'view, Otvori stan, ' + linkUrl
+                    },
+                    body: notificationMessage
+                }).then(response => {
+                    if (response.ok) {
+                        console.log('✅ Comment/rating notification sent to ntfy.sh/stanovi');
+                    } else {
+                        console.warn('⚠️ Failed to send comment/rating notification:', response.status);
+                    }
+                }).catch(error => {
+                    console.warn('⚠️ Failed to send comment/rating notification:', error);
+                });
+            } catch (error) {
+                console.warn('Failed to send comment/rating notification:', error);
+            }
+        }
+
+        // Check URL parameter and show testing panel if needed
+        function checkTestingParameter() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const testingParam = urlParams.get('testing');
+
+            if (testingParam === 'true') {
+                const testingPanel = document.getElementById('testing-panel');
+                if (testingPanel) {
+                    testingPanel.style.display = 'block';
+                    console.log('🧪 Testing panel enabled via URL parameter');
+                }
+            }
+        }
+
+        // Filter state
+        let activeFilters = {
+            starRating: null,
+            kontaktirao: false,
+            termin: false
+        };
+
+        // Filter functionality
+        function setupFilters() {
+            // Star rating filter
+            const starFilterButtons = document.querySelectorAll('.star-filter-btn');
+            starFilterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const rating = parseInt(btn.dataset.rating);
+
+                    if (activeFilters.starRating === rating) {
+                        // Reset if clicking the same star
+                        activeFilters.starRating = null;
+                        updateStarFilterDisplay();
+                    } else {
+                        // Set new rating filter
+                        activeFilters.starRating = rating;
+                        updateStarFilterDisplay();
+                    }
+
+                    applyFilters();
+                });
+
+                // Add hover effects
+                btn.addEventListener('mouseenter', () => {
+                    const hoverRating = parseInt(btn.dataset.rating);
+                    updateStarFilterDisplay(hoverRating);
+                });
+
+                btn.addEventListener('mouseleave', () => {
+                    updateStarFilterDisplay();
+                });
+            });
+
+            // Kontaktirao filter
+            const kontaktiraoFilter = document.getElementById('kontaktirao-filter');
+            kontaktiraoFilter.addEventListener('change', () => {
+                activeFilters.kontaktirao = kontaktiraoFilter.checked;
+                applyFilters();
+            });
+
+            // Termin filter
+            const terminFilter = document.getElementById('termin-filter');
+            terminFilter.addEventListener('change', () => {
+                activeFilters.termin = terminFilter.checked;
+                applyFilters();
+            });
+
+
+        }
+
+        function updateStarFilterDisplay(hoverRating = null) {
+            const starFilterButtons = document.querySelectorAll('.star-filter-btn');
+            starFilterButtons.forEach((btn, index) => {
+                const btnRating = parseInt(btn.dataset.rating);
+
+                // Determine which rating to display (hover takes precedence)
+                const displayRating = hoverRating || activeFilters.starRating;
+
+                if (displayRating && btnRating <= displayRating) {
+                    if (hoverRating && btnRating <= hoverRating) {
+                        // Hover preview - slightly different color
+                        btn.style.color = '#ffeb3b'; // Lighter gold for hover preview
+                    } else if (activeFilters.starRating && btnRating <= activeFilters.starRating) {
+                        // Active filter - normal gold
+                        btn.style.color = '#ffc107'; // Gold color for active stars
+                    } else {
+                        btn.style.color = '#ddd'; // Gray for inactive stars
+                    }
+                } else {
+                    btn.style.color = '#ddd'; // Gray for inactive stars
+                }
+            });
+        }
+
+        function applyFilters() {
+            const entriesDiv = document.getElementById('entries');
+            const allEntries = entriesDiv.querySelectorAll('.entry');
+            let visibleCount = 0;
+
+            allEntries.forEach((entryDiv) => {
+                const entryIndex = parseInt(entryDiv.dataset.entryIndex);
+                const entry = entries[entryIndex];
+                let shouldShow = true;
+
+                if (!entry) {
+                    console.warn(`Entry not found for index ${entryIndex}`);
+                    entryDiv.style.display = 'none';
+                    return;
+                }
+
+                // Star rating filter
+                if (activeFilters.starRating !== null) {
+                    const adisRating = parseInt(entry.adisOcjena) || 0;
+                    const roditeljiRating = parseInt(entry.roditeljiOcjena) || 0;
+                    const maxRating = Math.max(adisRating, roditeljiRating);
+
+                    if (maxRating < activeFilters.starRating) {
+                        shouldShow = false;
+                    }
+                }
+
+                // Kontaktirao filter
+                if (activeFilters.kontaktirao && !entry.kontaktirao) {
+                    shouldShow = false;
+                }
+
+                // Termin filter
+                if (activeFilters.termin && (!entry.termin || entry.termin.trim() === '')) {
+                    shouldShow = false;
+                }
+
+                // Show/hide entry
+                entryDiv.style.display = shouldShow ? 'block' : 'none';
+                if (shouldShow) visibleCount++;
+            });
+
+            // Debug information
+            console.log(`Filter applied: ${visibleCount} entries visible out of ${entries.length}`);
+            if (activeFilters.kontaktirao) {
+                const kontaktiraoEntries = entries.filter(e => e.kontaktirao);
+                console.log(`Kontaktirao filter active: ${kontaktiraoEntries.length} entries have kontaktirao=true`);
+                kontaktiraoEntries.forEach((entry, i) => {
+                    console.log(`Entry ${i}: kontaktirao=${entry.kontaktirao}, title="${entry.title}"`);
+                });
+            }
+        }
+
         // Load data on page load
         loadData();
+
+        // Check testing parameter
+        checkTestingParameter();
+
+        // Setup filters after a delay to ensure DOM is ready
+        setTimeout(setupFilters, 100);
     </script>
 </body>
 
